@@ -6,13 +6,28 @@ game.scene.begin = function () {
 	game.create.block ({ h: 10, i: game.i.borderblue, repeat: true, w: 200, x: 0, y: 300, z: 1}).load ();
 	game.create.block ({ h: 10, i: game.i.borderblue, repeat: true, w: 500, x: 0, y: 490, z: 1}).load ();
 	game.create.block ({ h: 490, i: game.i.borderblue, repeat: true, w: 10, x: 490, y: 0, z: 1}).load ();
-	game.create.gate ({ action: function () { game.play ({ name: 'win' }); game.scene.intro (); }, h: 100, i: game.i.gateborderblue, repeat: true, w: 100, x: 350, y: 50, z: 1}).load ();
+
+	game.create.gate ({ action: function () { game.play ({ name: 'open' }); game.scene.hospital (); }, h: 100, i: game.i.gateborderblue, repeat: true, w: 100, x: 350, y: 50, z: 1}).load ();
+
 	game.create.sprite ({ h: 500, i: game.i.black, w: 500, x: 0, y: 0}).load ();
 	game.create.text ({ align: 'center', color: '#fff', font: 'monospace', size: 15,  text: 'Войди в жёлтую зону, чтобы перейти на новый уровень', x: 640, y: 690 }).load ();
 
 	let hero = game.create.unit ({ h: 50, i: game.i.men, speed: 7, w: 35, x: 10, y: 10, z: 1});
 		hero.load ();
 	game.create.animation ({ a: game.a.men_go, delay: 150, get stop () { return !hero.animation.walk; }, h: 50, i: game.i.men, link: hero, sound: { delay: 400, name: 'step', volume: 0.5 }, x: 10, y: 10, w: 35, z: 1 }).load ();
+}
+
+game.scene.hospital = function () {
+	game.wipe ();
+	game.create.sprite ({ h: 720, i: game.i.lvl_hospital, w: 1280, x: 0, y: 0}).load ();
+
+	game.create.block ({ h: 10, i: game.i.borderblue, repeat: true, w: 1280, x: 0, y: 174, z: 1}).load ();
+
+	game.create.gate ({ action: function () { game.play ({ name: 'open' }); game.scene.menu (); }, h: 141, i: game.i.black, w: 100, x: 189, y: 42, z: 1}).load ();
+
+	let hero = game.create.unit ({ h: 50, i: game.i.men, speed: 7, w: 35, x: 500, y: 300, z: 1});
+		hero.load ();
+	game.create.animation ({ a: game.a.men_go, delay: 150, get stop () { return !hero.animation.walk; }, h: 50, i: game.i.men, link: hero, sound: { delay: 400, name: 'step', volume: 0.5 }, x: 500, y: 300, w: 35, z: 1 }).load ();
 }
 
 game.scene.intro = function () {
