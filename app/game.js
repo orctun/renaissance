@@ -21,8 +21,8 @@ game.scene.hospital = function () {
 	game.wipe ();
 	game.create.sprite ({ h: 720, i: game.i.lvl_hospital, w: 1280, x: 0, y: 0}).load ();
 
-	game.create.block ({ h: 10, i: game.i.void, w: 187, x: 0, y: 124, z: 1}).load ();
-	game.create.block ({ h: 10, i: game.i.void, w: 990, x: 290, y: 124, z: 1}).load ();
+	game.create.block ({ h: 140, i: game.i.wall, repeat: true, w: 187, x: 0, y: 0, z: 1}).load ();
+	game.create.block ({ h: 140, i: game.i.wall, repeat: true, w: 990, x: 290, y: 0, z: 1}).load ();
 
 	game.create.gate ({ action: function () { game.play ({ name: 'open' }); game.scene.menu (); }, h: 90, i: game.i.black, w: 99, x: 190, y: 42, z: 1}).load ();
 

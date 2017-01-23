@@ -18,5 +18,6 @@ game.get.i ([
 	'ready',
 	'start',
 	'test',
-	'void'
+	'void',
+	'wall'
 ]);
