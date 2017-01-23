@@ -1,4 +1,4 @@
-game.scene.load = function () { game.scene.menu (); }
+game.scene.load = function () { game.scene.select (); }
 
 game.scene.begin = function () {
 	game.wipe ();
@@ -46,7 +46,7 @@ game.scene.intro3 = function () {
 
 game.scene.intro4 = function () {
 	game.wipe ();
-	game.create.button ({ action: function () { game.play ({ name: 'click' }); game.scene.begin (); }, h: 15, i: game.i.next, w: 25, x: 1080, y: 420 }).load ();
+	game.create.button ({ action: function () { game.play ({ name: 'click' }); game.scene.select (); }, h: 15, i: game.i.next, w: 25, x: 1080, y: 420 }).load ();
 	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'monospace', size: 25,
 		text: 'Преступившие закон и лишняя биомасса отправлялась в лунные колонии.', x: 640, y: 320 }).load ();
 	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'monospace', size: 25,
@@ -69,4 +69,20 @@ game.scene.menu = function () {
 			game.create.box ({ fill: game.get.r ('color'), h: 1, x: x, y: y, w: 1 }).load ();
 		}
 	} }).load ();
+}
+
+game.scene.select = function () {
+	game.wipe ();
+
+	game.create.button ({ action: function () { game.play ({ name: 'click' }); game.scene.select (); }, h: 50, i: game.i.men, w: 35, x: 414, y: 300 }).load ();
+	game.create.text ({ align: 'center', baseline: 'middle', color: '#0CC2FF', font: 'monospace', size: 20,
+		text: 'Навибо - авантюрист с Земли', x: 414, y: 370 }).load ();
+
+
+	game.create.button ({ action: function () { game.play ({ name: 'click' }); game.scene.select (); }, h: 50, i: game.i.girl, w: 35, x: 841, y: 300 }).load ();
+	game.create.text ({ align: 'center', baseline: 'middle', color: '#FF93E6', font: 'monospace', size: 20,
+		text: 'Гера - лунианский учёный', x: 841, y: 370 }).load ();
+
+	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'monospace', size: 25,
+		text: 'Выберите за кого хотите играть..', x: 640, y: 520 }).load ();
 }
