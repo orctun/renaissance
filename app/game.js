@@ -1,30 +1,41 @@
-game.scene.load = function () { game.scene.hospital (); }
+game.scene.load = function () { game.scene.select (); }
 
 game.scene.begin = function () {
 	game.wipe ();
+
+	game.create.sprite ({ h: 500, i: game.i.black, w: 640, x: 0, y: 0}).load ();
+	game.create.sprite ({ h: 500, i: game.i.black, w: 640, x: 640, y: 0}).load ();
+
+	game.create.block ({ h: 200, i: game.i.borderblue, repeat: true, w: 10, x: 740, y: 0, z: 1}).load ();
+	game.create.block ({ h: 10, i: game.i.borderblue, repeat: true, w: 200, x: 640, y: 300, z: 1}).load ();
+	game.create.block ({ h: 10, i: game.i.borderblue, repeat: true, w: 500, x: 640, y: 490, z: 1}).load ();
+
 	game.create.block ({ h: 200, i: game.i.borderblue, repeat: true, w: 10, x: 100, y: 0, z: 1}).load ();
 	game.create.block ({ h: 10, i: game.i.borderblue, repeat: true, w: 200, x: 0, y: 300, z: 1}).load ();
-	game.create.block ({ h: 10, i: game.i.borderblue, repeat: true, w: 500, x: 0, y: 490, z: 1}).load ();
-	game.create.block ({ h: 490, i: game.i.borderblue, repeat: true, w: 10, x: 490, y: 0, z: 1}).load ();
+	game.create.block ({ h: 10, i: game.i.borderblue, repeat: true, w: 640, x: 0, y: 490, z: 1}).load ();
+	game.create.block ({ h: 490, i: game.i.borderblue, repeat: true, w: 10, x: 630, y: 0, z: 1}).load ();
 
 	game.create.gate ({ action: function () { game.play ({ name: 'open' }); game.scene.hospital (); }, h: 100, i: game.i.gateborderblue, repeat: true, w: 100, x: 350, y: 50, z: 1}).load ();
 
-	game.create.sprite ({ h: 500, i: game.i.black, w: 500, x: 0, y: 0}).load ();
-	game.create.text ({ align: 'center', color: '#fff', font: 'monospace', size: 15,  text: 'Войди в жёлтую зону, чтобы перейти на новый уровень', x: 640, y: 690 }).load ();
 
-	let hero = game.create.unit ({ h: 50, i: game.i.men, speed: 7, w: 35, x: 10, y: 10, z: 1});
+	game.create.text ({ align: 'center', color: '#fff', font: 'Arial', size: 25,  text: '[Обучение] Используя W, A, S, D вы без труда найдёте выход из любой передряги', x: 640, y: 670 }).load ();
+
+	let hero = game.create.unit ({ h: 50, i: game.i.men, speed: 7, w: 35, x: 414, y: 300, z: 1});
 		hero.load ();
-	game.create.animation ({ a: game.a.men_go, delay: 150, get stop () { return !hero.animation.walk; }, h: 50, i: game.i.men, link: hero, sound: { delay: 400, name: 'step', volume: 0.5 }, x: 10, y: 10, w: 35, z: 1 }).load ();
+	game.create.animation ({ a: game.a.men_go, delay: 150, get stop () { return !hero.animation.walk; }, h: 50, i: game.i.men, link: hero, sound: { delay: 400, name: 'step', volume: 0.5 }, x: hero.x, y: hero.y, w: 35, z: 1 }).load ();
 }
 
 game.scene.hospital = function () {
 	game.wipe ();
-	game.create.sprite ({ h: 720, i: game.i.lvl_hospital, w: 1280, x: 0, y: 0}).load ();
+	game.create.sprite ({ h: 185, i: game.i.lvl_hospital_exit, w: 102, x: 188, y: 0}).load ();
 
-	game.create.block ({ h: 140, i: game.i.wall, repeat: true, w: 187, x: 0, y: 0, z: 1}).load ();
+	game.create.block ({ h: 140, i: game.i.wall, repeat: true, w: 188, x: 0, y: 0, z: 1}).load ();
+	game.create.sprite ({ h: 45, i: game.i.wall_green, repeat: true, w: 188, x: 0, y: 140}).load ();
+
 	game.create.block ({ h: 140, i: game.i.wall, repeat: true, w: 990, x: 290, y: 0, z: 1}).load ();
+	game.create.sprite ({ h: 45, i: game.i.wall_green, repeat: true, w: 990, x: 290, y: 140}).load ();
 
-	game.create.gate ({ action: function () { game.play ({ name: 'open' }); game.scene.menu (); }, h: 90, i: game.i.black, w: 99, x: 190, y: 42, z: 1}).load ();
+	game.create.gate ({ action: function () { game.play ({ name: 'open' }); game.scene.menu (); }, h: 90, i: game.i.black, w: 98, x: 190, y: 42, z: 1}).load ();
 
 	let hero = game.create.unit ({ h: 50, i: game.i.men, speed: 7, w: 35, x: 500, y: 300, z: 1});
 		hero.load ();
@@ -95,13 +106,13 @@ game.scene.menu = function () {
 game.scene.select = function () {
 	game.wipe ();
 
-	game.create.button ({ action: function () { game.play ({ name: 'click' }); game.scene.begin (); }, h: 50, i: game.i.men, w: 35, x: 414, y: 300 }).load ();
+	game.create.button ({ action: function () { game.play ({ name: 'win' }); game.scene.begin (); }, h: 50, i: game.i.men, w: 35, x: 414, y: 300 }).load ();
 	game.create.text ({ align: 'center', baseline: 'middle', color: '#0CC2FF', font: 'Arial', size: 20,
 		text: 'Навибо - авантюрист с Земли', x: 414, y: 370 }).load ();
 
 	game.create.button ({ action: function () { game.play ({ name: 'click' }); game.scene.select (); }, h: 50, i: game.i.girl, w: 35, x: 841, y: 300 }).load ();
 	game.create.text ({ align: 'center', baseline: 'middle', color: '#FF93E6', font: 'Arial', size: 20,
-		text: 'Гера - лунианский учёный', x: 841, y: 370 }).load ();
+		text: 'Гера - лунианский учёный [недоступно]', x: 841, y: 370 }).load ();
 
 	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'Arial', size: 25,
 		text: 'Выберите за кого хотите играть..', x: 640, y: 520 }).load ();

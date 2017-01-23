@@ -12,12 +12,13 @@ game.get.i ([
 	'girl',
 	'go',
 	'logo',
-	'lvl_hospital',
+	'lvl_hospital_exit',
 	'men',
 	'next',
 	'ready',
 	'start',
 	'test',
 	'void',
-	'wall'
+	'wall',
+	'wall_green'
 ]);
