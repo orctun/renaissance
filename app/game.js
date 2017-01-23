@@ -1,4 +1,4 @@
-game.scene.load = function () { game.scene.select (); }
+game.scene.load = function () { game.scene.menu (); }
 
 game.scene.begin = function () {
 	game.wipe ();
@@ -18,7 +18,7 @@ game.scene.begin = function () {
 game.scene.intro = function () {
 	game.wipe ();
 	game.create.button ({ action: function () { game.play ({ name: 'click' }); game.scene.intro2 (); }, h: 15, i: game.i.next, w: 25, x: 1080, y: 420 }).load ();
-	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'monospace', size: 25,
+	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'Arial', size: 25,
 		text: 'Люди победили смерть и научислись воскрешать себя благодаря Частице Бога,', x: 640, y: 340 }).load ();
 	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'monospace', size: 25,
 			text: 'обнаруженной в ходе экспериментов с адронным коллайдером.', x: 640, y: 380 }).load ();
@@ -58,7 +58,12 @@ game.scene.intro4 = function () {
 game.scene.menu = function () {
 	game.wipe ();
 	game.play ({ name: 'main', ost: true, volume: 0.5 });
-	game.create.button ({ action: function () { game.play ({ name: 'bom' }); game.scene.intro (); }, h: 24, i: game.i.start, in: function () { game.ost.volume = 1; }, out: function () { game.ost.volume = 0.5; }, w: 106, x: 574, y: 343, z: 1 }).load ();
+
+	game.create.sprite ({ h: 75, i: game.i.logo, w: 366, x: 445, y: 250}).load ();
+
+	game.create.sprite ({ h: 24, i: game.i.black, w: 106, x: 574, y: 343}).load ();
+	game.create.button ({ action: function () { game.play ({ name: 'bom' }); game.scene.intro (); }, h: 24, in: function () { game.ost.volume = 1; }, out: function () { game.ost.volume = 0.5; }, w: 106, x: 574, y: 343, z: 1 }).load ();
+	game.create.animation ({ a: game.a.start, delay: 100, get stop () { }, h: 24, x: 574, y: 343, w: 106, z: 1 }).load ();
 
 	let x0 = 635;
 	let y0 = 355;
@@ -77,7 +82,6 @@ game.scene.select = function () {
 	game.create.button ({ action: function () { game.play ({ name: 'click' }); game.scene.select (); }, h: 50, i: game.i.men, w: 35, x: 414, y: 300 }).load ();
 	game.create.text ({ align: 'center', baseline: 'middle', color: '#0CC2FF', font: 'monospace', size: 20,
 		text: 'Навибо - авантюрист с Земли', x: 414, y: 370 }).load ();
-
 
 	game.create.button ({ action: function () { game.play ({ name: 'click' }); game.scene.select (); }, h: 50, i: game.i.girl, w: 35, x: 841, y: 300 }).load ();
 	game.create.text ({ align: 'center', baseline: 'middle', color: '#FF93E6', font: 'monospace', size: 20,
