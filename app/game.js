@@ -20,38 +20,38 @@ game.scene.intro = function () {
 	game.create.button ({ action: function () { game.play ({ name: 'click' }); game.scene.intro2 (); }, h: 15, i: game.i.next, w: 25, x: 1080, y: 420 }).load ();
 	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'Arial', size: 25,
 		text: 'Люди победили смерть и научислись воскрешать себя благодаря Частице Бога,', x: 640, y: 340 }).load ();
-	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'monospace', size: 25,
+	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'Arial', size: 25,
 			text: 'обнаруженной в ходе экспериментов с адронным коллайдером.', x: 640, y: 380 }).load ();
 }
 
 game.scene.intro2 = function () {
 	game.wipe ();
 	game.create.button ({ action: function () { game.play ({ name: 'click' }); game.scene.intro3 (); }, h: 15, i: game.i.next, w: 25, x: 1080, y: 420 }).load ();
-	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'monospace', size: 25,
+	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'Arial', size: 25,
 		text: 'Возрождение коснулось всех живых существ планеты,', x: 640, y: 340 }).load ();
-	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'monospace', size: 25,
+	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'Arial', size: 25,
 			text: 'что поставило её на грань уничтожения.', x: 640, y: 380 }).load ();
 }
 
 game.scene.intro3 = function () {
 	game.wipe ();
 	game.create.button ({ action: function () { game.play ({ name: 'click' }); game.scene.intro4 (); }, h: 15, i: game.i.next, w: 25, x: 1080, y: 420 }).load ();
-	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'monospace', size: 25,
+	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'Arial', size: 25,
 		text: 'После череды мировых войн за ресурсы стало ясно, что война бесполезна.', x: 640, y: 320 }).load ();
-	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'monospace', size: 25,
+	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'Arial', size: 25,
 			text: 'Человечество было вынуждено принять жестокие законы,', x: 640, y: 360 }).load ();
-	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'monospace', size: 25,
+	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'Arial', size: 25,
 			text: 'запрещающие размножение и разведение животных и растений.', x: 640, y: 400 }).load ();
 }
 
 game.scene.intro4 = function () {
 	game.wipe ();
 	game.create.button ({ action: function () { game.play ({ name: 'click' }); game.scene.select (); }, h: 15, i: game.i.next, w: 25, x: 1080, y: 420 }).load ();
-	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'monospace', size: 25,
+	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'Arial', size: 25,
 		text: 'Преступившие закон и лишняя биомасса отправлялась в лунные колонии.', x: 640, y: 320 }).load ();
-	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'monospace', size: 25,
+	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'Arial', size: 25,
 			text: 'Восстание луниан 2055 года и отказ принимать корабли землян', x: 640, y: 360 }).load ();
-	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'monospace', size: 25,
+	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'Arial', size: 25,
 			text: 'стали причиной войны между Землёй и Луной. Космос забирал всех.', x: 640, y: 400 }).load ();
 }
 
@@ -79,14 +79,14 @@ game.scene.menu = function () {
 game.scene.select = function () {
 	game.wipe ();
 
-	game.create.button ({ action: function () { game.play ({ name: 'click' }); game.scene.select (); }, h: 50, i: game.i.men, w: 35, x: 414, y: 300 }).load ();
-	game.create.text ({ align: 'center', baseline: 'middle', color: '#0CC2FF', font: 'monospace', size: 20,
+	game.create.button ({ action: function () { game.play ({ name: 'click' }); game.scene.begin (); }, h: 50, i: game.i.men, w: 35, x: 414, y: 300 }).load ();
+	game.create.text ({ align: 'center', baseline: 'middle', color: '#0CC2FF', font: 'Arial', size: 20,
 		text: 'Навибо - авантюрист с Земли', x: 414, y: 370 }).load ();
 
 	game.create.button ({ action: function () { game.play ({ name: 'click' }); game.scene.select (); }, h: 50, i: game.i.girl, w: 35, x: 841, y: 300 }).load ();
-	game.create.text ({ align: 'center', baseline: 'middle', color: '#FF93E6', font: 'monospace', size: 20,
+	game.create.text ({ align: 'center', baseline: 'middle', color: '#FF93E6', font: 'Arial', size: 20,
 		text: 'Гера - лунианский учёный', x: 841, y: 370 }).load ();
 
-	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'monospace', size: 25,
+	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'Arial', size: 25,
 		text: 'Выберите за кого хотите играть..', x: 640, y: 520 }).load ();
 }
