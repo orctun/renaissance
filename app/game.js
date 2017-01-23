@@ -1,4 +1,4 @@
-game.scene.load = function () { game.scene.menu (); }
+game.scene.load = function () { game.scene.hospital (); }
 
 game.scene.begin = function () {
 	game.wipe ();
@@ -21,9 +21,10 @@ game.scene.hospital = function () {
 	game.wipe ();
 	game.create.sprite ({ h: 720, i: game.i.lvl_hospital, w: 1280, x: 0, y: 0}).load ();
 
-	game.create.block ({ h: 10, i: game.i.borderblue, repeat: true, w: 1280, x: 0, y: 174, z: 1}).load ();
+	game.create.block ({ h: 10, i: game.i.void, w: 187, x: 0, y: 124, z: 1}).load ();
+	game.create.block ({ h: 10, i: game.i.void, w: 990, x: 290, y: 124, z: 1}).load ();
 
-	game.create.gate ({ action: function () { game.play ({ name: 'open' }); game.scene.menu (); }, h: 141, i: game.i.black, w: 100, x: 189, y: 42, z: 1}).load ();
+	game.create.gate ({ action: function () { game.play ({ name: 'open' }); game.scene.menu (); }, h: 90, i: game.i.black, w: 99, x: 190, y: 42, z: 1}).load ();
 
 	let hero = game.create.unit ({ h: 50, i: game.i.men, speed: 7, w: 35, x: 500, y: 300, z: 1});
 		hero.load ();
