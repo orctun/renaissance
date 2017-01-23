@@ -1,4 +1,4 @@
-game.scene.load = function () { game.scene.select (); }
+game.scene.load = function () { game.scene.begin (); }
 
 game.scene.begin = function () {
 	game.wipe ();
@@ -15,13 +15,13 @@ game.scene.begin = function () {
 	game.create.block ({ h: 200, i: game.i.borderblue, repeat: true, w: 10, x: 100, y: 0, z: 1}).load ();
 	game.create.block ({ h: 10, i: game.i.borderblue, repeat: true, w: 200, x: 0, y: 300, z: 1}).load ();
 	game.create.block ({ h: 10, i: game.i.borderblue, repeat: true, w: 640, x: 0, y: 490, z: 1}).load ();
-	game.create.block ({ h: 490, i: game.i.borderblue, repeat: true, w: 10, x: 630, y: 0, z: 1}).load ();
+	game.create.block ({ h: 390, i: game.i.borderblue, repeat: true, w: 10, x: 630, y: 0, z: 1}).load ();
 
 	game.create.text ({ align: 'center', color: '#fff', font: 'Arial', id: 'tip_move', size: 25,  text: '[Обучение] Используя W, A, S, D вы без труда найдёте выход из любой передряги', x: 640, y: 670, z: 1 }).load ();
 
 	let tip_move_action = game.create.text ({ align: 'center', color: '#ff0', font: 'Arial', id: 'tip_move_action', size: 25,  text: '[Обучение] Часто вам нужно просто подойти, чтобы что-то активировать', x: 640, y: 670, z: 1 });
 
-	game.create.gate ({ action: function () { game.play ({ name: 'open' }); delete game.object.tip_move; tip_move_action.load (); game.draw (true); }, h: 100, i: game.i.gateborderblue, repeat: true, w: 100, x: 350, y: 50, z: 1}).load ();
+	game.create.gate ({ action: function () { game.play ({ name: 'open' });   delete game.object.tip_move; tip_move_action.load (); game.draw (true); delete game.object.gate; }, h: 100, i: game.i.gateborderblue, id: 'gate', repeat: true, w: 50, x: 580, y: 390, z: 1}).load ();
 
 	let hero = game.create.unit ({ h: 50, i: game.i.men, speed: 7, w: 35, x: 414, y: 300, z: 1});
 		hero.load ();
