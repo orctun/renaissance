@@ -63,7 +63,7 @@ game.scene.menu = function () {
 	let x0 = 635;
 	let y0 = 355;
 	game.create.timer ({ action: function () {
-		if (Object.keys (game.object).length < 1000) {
+		if (Object.keys (game.object).length < 2000) {
 			let x = game.get.r (0, canvas.width, true);
 			let y = game.get.r (0, canvas.height, true);
 			game.create.box ({ fill: game.get.r ('color'), h: 1, x: x, y: y, w: 1 }).load ();
