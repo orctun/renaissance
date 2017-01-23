@@ -18,6 +18,7 @@ game.get.i ([
 	'ready',
 	'start',
 	'test',
+	'up',
 	'void',
 	'wall',
 	'wall_green'

@@ -6,6 +6,8 @@ game.scene.begin = function () {
 	game.create.sprite ({ h: 500, i: game.i.black, w: 640, x: 0, y: 0}).load ();
 	game.create.sprite ({ h: 500, i: game.i.black, w: 640, x: 640, y: 0}).load ();
 
+	game.create.sprite ({ h: 30, i: game.i.black, w: 1000, x: 140, y: 670}).load ();
+
 	game.create.block ({ h: 200, i: game.i.borderblue, repeat: true, w: 10, x: 740, y: 0, z: 1}).load ();
 	game.create.block ({ h: 10, i: game.i.borderblue, repeat: true, w: 200, x: 640, y: 300, z: 1}).load ();
 	game.create.block ({ h: 10, i: game.i.borderblue, repeat: true, w: 500, x: 640, y: 490, z: 1}).load ();
@@ -15,10 +17,11 @@ game.scene.begin = function () {
 	game.create.block ({ h: 10, i: game.i.borderblue, repeat: true, w: 640, x: 0, y: 490, z: 1}).load ();
 	game.create.block ({ h: 490, i: game.i.borderblue, repeat: true, w: 10, x: 630, y: 0, z: 1}).load ();
 
-	game.create.gate ({ action: function () { game.play ({ name: 'open' }); game.scene.hospital (); }, h: 100, i: game.i.gateborderblue, repeat: true, w: 100, x: 350, y: 50, z: 1}).load ();
+	game.create.text ({ align: 'center', color: '#fff', font: 'Arial', id: 'tip_move', size: 25,  text: '[Обучение] Используя W, A, S, D вы без труда найдёте выход из любой передряги', x: 640, y: 670, z: 1 }).load ();
 
+	let tip_move_action = game.create.text ({ align: 'center', color: '#ff0', font: 'Arial', id: 'tip_move_action', size: 25,  text: '[Обучение] Часто вам нужно просто подойти, чтобы что-то активировать', x: 640, y: 670, z: 1 });
 
-	game.create.text ({ align: 'center', color: '#fff', font: 'Arial', size: 25,  text: '[Обучение] Используя W, A, S, D вы без труда найдёте выход из любой передряги', x: 640, y: 670 }).load ();
+	game.create.gate ({ action: function () { game.play ({ name: 'open' }); delete game.object.tip_move; tip_move_action.load (); game.draw (true); }, h: 100, i: game.i.gateborderblue, repeat: true, w: 100, x: 350, y: 50, z: 1}).load ();
 
 	let hero = game.create.unit ({ h: 50, i: game.i.men, speed: 7, w: 35, x: 414, y: 300, z: 1});
 		hero.load ();
