@@ -1,4 +1,5 @@
 game.get.a ({
+	'fly_fly': 4,
 	'girl_go': 2,
 	'men_go': 2,
 	'start': 5

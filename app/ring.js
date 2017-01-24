@@ -198,6 +198,28 @@ var game = {
 			return button;
 		},
 
+		fly: function (_) {
+			let fly = game.create.unit (_);
+				fly.ar = _.ar || 0;
+
+			fly.ai = function () {
+				if (game.object.hero) {
+					if (game.get.ab (fly, game.object.hero) < fly.ar) {
+						fly.vx = game.object.hero.x;
+						fly.vy = game.object.hero.y;
+					}
+				}
+			}
+
+			fly.tick = function () {
+				fly.use ();
+				fly.ai ();
+				fly.go ();
+			}
+
+			return fly;
+		},
+
 		gate: function (_) {
 			let gate = game.create.sprite (_);
 					gate.action = _.action || function () {};
@@ -427,36 +449,9 @@ var game = {
 				unit.go ();
 			}
 
-			unit.use = function () {
-				if (game.key[' '] && !unit.animation.walk) {
-					unit.action ();
-					unit.animation.say = true;
-				} else {
-					unit.animation.say = false;
-				}
-			}
+			unit.use = function () {}
 
-			unit.vector = function () {
-				if (game.key.A) {
-					unit.vx = (unit.vx > 0) ? unit.vx - unit.speed : unit.vx;
-					unit.animation.walk = true;
-				}
-
-				if (game.key.D) {
-					unit.vx = (unit.vx + unit.w < canvas.width) ? unit.vx + unit.speed : unit.vx;
-					unit.animation.walk = true;
-				}
-
-				if (game.key.S) {
-					unit.vy = (unit.vy + unit.h < canvas.height) ? unit.vy + unit.speed : unit.vy;
-					unit.animation.walk = true;
-				}
-
-				if (game.key.W) {
-					unit.vy = (unit.vy > 0) ? unit.vy - unit.speed : unit.vy;
-					unit.animation.walk = true;
-				}
-			}
+			unit.vector = function () {}
 
 			return unit;
 		}
