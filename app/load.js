@@ -18,6 +18,7 @@ game.get.i ([
 	'men',
 	'next',
 	'ready',
+	'redzone',
 	'start',
 	'test',
 	'up',
