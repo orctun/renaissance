@@ -5,6 +5,7 @@ game.get.a ({
 });
 
 game.get.i ([
+	'arena',
 	'black',
 	'blue',
 	'borderblue',
@@ -17,10 +18,13 @@ game.get.i ([
 	'lvl_hospital_exit',
 	'men',
 	'next',
+	'pillar',
 	'ready',
 	'redzone',
+	'roof',
 	'start',
 	'test',
+	'tribune',
 	'up',
 	'void',
 	'wall',
