@@ -217,6 +217,76 @@ var game = {
 			return gate;
 		},
 
+		hero: function (_) {
+			let hero = game.create.unit (_);
+				hero.action = _.action || function () {};
+
+				hero.go = function () {
+					hero.vr = game.get.ab ({ x: hero.x, y: hero.y }, { x: hero.vx, y: hero.vy });
+					if (hero.vr > hero.speed) {
+						let v = game.get.abr ({ x: hero.x, y: hero.y }, { x: hero.vx, y: hero.vy }, hero.speed);
+						let x = hero.x;
+						let y = hero.y;
+						hero.x = v.x;
+						hero.y = v.y;
+
+						if (!hero.blocked ()) {
+							hero.move (v.x, v.y);
+						} else {
+							hero.x = x;
+							hero.y = y;
+							hero.vx = x;
+							hero.vy = y;
+						}
+
+					} else {
+						if (!game.key.A && !game.key.D && !game.key.S && !game.key.W) {
+							hero.animation.walk = false;
+						}
+					}
+				}
+
+				hero.tick = function () {
+					hero.use ();
+					hero.vector ();
+					hero.gravity ();
+					hero.go ();
+				}
+
+				hero.use = function () {
+					if (game.key[' '] && !hero.animation.walk) {
+						hero.action ();
+						hero.animation.use = true;
+					} else {
+						hero.animation.use = false;
+					}
+				}
+
+				hero.vector = function () {
+					if (game.key.A) {
+						hero.vx = (hero.vx > 0) ? hero.vx - hero.speed : hero.vx;
+						hero.animation.walk = true;
+					}
+
+					if (game.key.D) {
+						hero.vx = (hero.vx + hero.w < canvas.width) ? hero.vx + hero.speed : hero.vx;
+						hero.animation.walk = true;
+					}
+
+					if (game.key.S) {
+						hero.vy = (hero.vy + hero.h < canvas.height) ? hero.vy + hero.speed : hero.vy;
+						hero.animation.walk = true;
+					}
+
+					if (game.key.W) {
+						hero.vy = (hero.vy > 0) ? hero.vy - hero.speed : hero.vy;
+						hero.animation.walk = true;
+					}
+				}
+
+			return hero;
+		},
+
 		link: function (_) {
 			let link = game.create.text (game.create.button (_));
 			return link;
@@ -338,9 +408,7 @@ var game = {
 					}
 
 				} else {
-					if (!game.key.A && !game.key.D && !game.key.S && !game.key.W) {
-						unit.animation.walk = false;
-					}
+					unit.animation.walk = false;
 				}
 			}
 

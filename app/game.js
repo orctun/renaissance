@@ -77,9 +77,16 @@ game.scene.begin = function () {
 game.scene.begin1 = function () {
 	game.wipe ();
 
-	game.create.text ({ align: 'center', color: '#fff', font: 'Arial', id: 'tip_move', size: 25,  text: '[Обучение] Прежде, чем завершить обучение, вам придётся одолеть первого врага', x: 640, y: 670, z: 1 }).load ();
+	game.create.sprite ({ h: 377, i: game.i.arena, w: 597, x: 340, y: 150}).load ();
 
-	let hero = game.create.unit ({ h: 50, i: game.i.men, phys: { h: 50, w: 20 }, speed: 7, w: 35, x: 615, y: 335, z: 1});
+	game.create.block ({ h: 84, i: game.i.roof, w: 731, x: 270, y: 65, z: 1}).load ();
+	game.create.block ({ h: 391, i: game.i.pillar, w: 54, x: 295, y: 150, z: 2}).load ();
+	game.create.block ({ h: 391, i: game.i.pillar, w: 54, x: 928, y: 150, z: 2}).load ();
+	game.create.block ({ h: 98, i: game.i.tribune, w: 596, x: 340, y: 520, z: 1}).load ();
+
+	game.create.text ({ align: 'center', color: '#fff', font: 'Arial', id: 'tip_move', size: 25,  text: '[Обучение] Прежде, чем завершить обучение, вы должны научиться постоять за себя', x: 640, y: 670, z: 1 }).load ();
+
+	let hero = game.create.hero ({ h: 50, i: game.i.men, phys: { h: 50, w: 20 }, speed: 7, w: 35, x: 615, y: 335, z: 1});
 		hero.load ();
 	game.create.animation ({ a: game.a.men_go, delay: 150, get stop () { return !hero.animation.walk; }, h: 50, i: game.i.men, link: hero, sound: { delay: 400, name: 'step', volume: 0.5 }, x: hero.x, y: hero.y, w: 35, z: 1 }).load ();
 }
