@@ -6,11 +6,13 @@ game.get.a ({
 
 game.get.i ([
 	'black',
+	'blue',
 	'borderblue',
 	'doc',
 	'gateborderblue',
 	'girl',
 	'go',
+	'intro4',
 	'logo',
 	'lvl_hospital_exit',
 	'men',

@@ -300,6 +300,7 @@ var game = {
 			unit.animation = _.animation || {};
 			unit.g = _.g;
 			unit.hp = _.hp || [1, 1];
+			unit.phys = _.phys;
 			unit.speed = _.speed || 1;
 			unit.type = 'unit';
 			unit.vx = _.vx || unit.x;
@@ -308,7 +309,10 @@ var game = {
 			unit.blocked = function () {
 				for (let id in game.object) {
 					if (game.object[id].type == 'block') {
-						if (game.get.binbox (unit, game.object[id])) { return true; }
+						let phys = unit.phys || unit;
+							phys.x = unit.x + 0.5 * (unit.w - phys.w);
+							phys.y = unit.y + 0.5 * (unit.h - unit.h);
+						if (game.get.binbox (phys, game.object[id])) { return true; }
 					}
 				}
 				return false;
