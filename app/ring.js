@@ -297,6 +297,7 @@ var game = {
 
 		unit: function (_) {
 			let unit = game.create.sprite (_);
+			unit.action = _.action || function () {};
 			unit.animation = _.animation || {};
 			unit.g = _.g;
 			unit.hp = _.hp || [1, 1];
@@ -360,6 +361,7 @@ var game = {
 
 			unit.use = function () {
 				if (game.key[' '] && !unit.animation.walk) {
+					unit.action ();
 					unit.animation.say = true;
 				} else {
 					unit.animation.say = false;

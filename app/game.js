@@ -20,7 +20,10 @@ game.scene.begin = function () {
 
 	//right
 	game.create.block ({ h: 200, i: game.i.blue, w: 10, x: 740, y: 0, z: 1}).load ();
-	game.create.block ({ h: 10, i: game.i.blue, w: 400, x: 640, y: 300, z: 1}).load ();
+	game.create.block ({ h: 200, i: game.i.blue, w: 10, x: 840, y: 100, z: 1}).load ();
+	game.create.block ({ h: 200, i: game.i.blue, w: 10, x: 940, y: 0, z: 1}).load ();
+	game.create.block ({ h: 200, i: game.i.blue, w: 10, x: 1040, y: 100, z: 1}).load ();
+	game.create.block ({ h: 10, i: game.i.blue, w: 410, x: 640, y: 300, z: 1}).load ();
 	game.create.block ({ h: 10, i: game.i.blue, w: 640, x: 640, y: 490, z: 1}).load ();
 
 	//mid gate
@@ -34,12 +37,7 @@ game.scene.begin = function () {
 	//yellow trigger
 	let tip_move_action = game.create.text ({ align: 'center', color: '#ff0', font: 'Arial', id: 'tip_move_action', size: 25,  text: '[Обучение] Часто нужно просто подойти, чтобы что-то активировать', x: 640, y: 670, z: 1 });
 
-	game.create.gate ({ action: function () { game.play ({ name: 'open' }); delete game.object.wall, delete game.object.tip_move; tip_move_action.load (); game.draw (true); delete game.object.gate; }, h: 100, i: game.i.gateborderblue, id: 'gate', repeat: true, w: 50, x: 580, y: 390, z: 1}).load ();
-
-	//red trigger
-	let tip_action = game.create.text ({ align: 'center', color: '#f00', font: 'Arial', id: 'tip_move_action', size: 25,  text: '[Обучение] Иногда потребуется нажать SPACE в нужном месте', x: 640, y: 670, z: 1 });
-
-	game.create.gate ({ action: function () { game.play ({ name: 'bom' }); delete game.object.tip_move_action; tip_action.load (); game.draw (true); delete game.object.gatered; }, h: 50, i: game.i.redzone, id: 'gatered', repeat: true, w: 80, x: 650, y: 200, z: 1}).load ();
+	game.create.gate ({ action: function () { game.play ({ name: 'open' }); delete game.object.wall, delete game.object.tip_move; tip_move_action.load (); delete game.object.gate; game.draw (true); }, h: 100, i: game.i.gateborderblue, id: 'gate', repeat: true, w: 50, x: 580, y: 390, z: 1}).load ();
 
 	//exit
 	game.create.gate ({ action: function () { game.play ({ name: 'open' }); game.scene.hospital (); }, h: 25, i: game.i.up, w: 25, x: 680, y: 10, z: 1}).load ();
@@ -47,6 +45,32 @@ game.scene.begin = function () {
 	let hero = game.create.unit ({ h: 50, i: game.i.men, phys: { h: 50, w: 20 }, speed: 7, w: 35, x: 414, y: 300, z: 1});
 		hero.load ();
 	game.create.animation ({ a: game.a.men_go, delay: 150, get stop () { return !hero.animation.walk; }, h: 50, i: game.i.men, link: hero, sound: { delay: 400, name: 'step', volume: 0.5 }, x: hero.x, y: hero.y, w: 35, z: 1 }).load ();
+
+	//red trigger
+	let tip_action = game.create.text ({ align: 'center', color: '#f00', font: 'Arial', id: 'tip_move_action', size: 25,  text: '[Обучение] Иногда потребуется нажать SPACE', x: 640, y: 670, z: 1 });
+
+	game.create.gate ({
+		action: function () {
+			game.play ({ name: 'bom' });
+			delete game.object.tip_move_action;
+			tip_action.load ();
+			game.draw (true);
+			delete game.object.gatered;
+			hero.action = function () {
+				game.play ({ name: 'open' });
+				delete game.object.wallexit;
+				game.draw (true);
+			}
+		},
+		h: 50,
+		i: game.i.redzone,
+		id: 'gatered',
+		repeat: true,
+		w: 80,
+		x: 650,
+		y: 200,
+		z: 1
+	}).load ();
 }
 
 game.scene.hospital = function () {
