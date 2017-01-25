@@ -82,7 +82,7 @@ game.scene.begin1 = function () {
 	game.create.block ({ h: 84, i: game.i.roof, w: 731, x: 270, y: 65, z: 1}).load ();
 	game.create.block ({ h: 391, i: game.i.pillar, w: 54, x: 295, y: 150, z: 2}).load ();
 	game.create.block ({ h: 391, i: game.i.pillar, w: 54, x: 928, y: 150, z: 2}).load ();
-	game.create.block ({ h: 98, i: game.i.tribune, w: 596, x: 340, y: 520, z: 1}).load ();
+	game.create.block ({ h: 98, i: game.i.black, w: 596, x: 340, y: 520, z: 1}).load ();
 
 	game.create.text ({ align: 'center', color: '#fff', font: 'Arial', id: 'tip_move', size: 25,  text: '[Обучение] Прежде, чем завершить обучение, вы должны научиться постоять за себя', x: 640, y: 670, z: 1 }).load ();
 
@@ -90,9 +90,10 @@ game.scene.begin1 = function () {
 		hero.load ();
 	game.create.animation ({ a: game.a.men_go, delay: 150, get stop () { return !hero.animation.walk; }, h: 50, i: game.i.men, link: hero, sound: { delay: 400, name: 'step', volume: 0.5 }, x: hero.x, y: hero.y, w: 35, z: 1 }).load ();
 
-	let fly = game.create.fly ({ ar: 150, h: 50, hp: [5, 5], i: game.i.fly, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 715, y: 335, z: 1});
-		fly.load ();
-	game.create.animation ({ a: game.a.fly_fly, delay: 40, get stop () { }, h: 50, i: game.i.fly, link: fly, sound: { delay: 1000, name: 'bzz', volume: 0.2 }, x: fly.x, y: fly.y, w: 35, z: 1 }).load ();
+	game.create.fly ({ ar: 150, h: 50, hp: [5, 5], i: game.i.fly, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 715, y: 335, z: 1}).load ();
+
+	game.create.fly ({ ar: 150, h: 50, hp: [5, 5], i: game.i.fly, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 715, y: 200, z: 1}).load ();
+
 }
 
 game.scene.hospital = function () {

@@ -246,7 +246,6 @@ var game = {
 
 				enemy.bar = function () {
 					if (!game.object[enemy.id + 'bar']) {
-						window.console.log ('cr');
 						game.create.box ({
 							fill: '#f00',
 							h: 5,
@@ -265,7 +264,7 @@ var game = {
 
 				enemy.death = function () {
 					if (enemy.hp[0] <= 0) {
-
+						game.play ({ name: 'win' });
 						delete game.object[enemy.id];
 					}
 				}
@@ -283,6 +282,8 @@ var game = {
 		fly: function (_) {
 			let fly = game.create.enemy (_);
 				fly.hp = _.hp;
+
+			game.create.animation ({ a: game.a.fly_fly, delay: 40, get stop () { }, h: 50, i: game.i.fly, link: fly, sound: { delay: 1000, name: 'bzz', volume: 0.2 }, x: fly.x, y: fly.y, w: 35, z: 1 }).load ();
 
 			return fly;
 		},
@@ -320,8 +321,8 @@ var game = {
 							vx: event.x,
 							vy: event.y,
 							w: 10,
-							x: hero.x,
-							y: hero.y
+							x: hero.x + 0.5 * hero.w,
+							y: hero.y + 0.3 * hero.h
 						}).load ();
 					}
 				}
