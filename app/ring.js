@@ -198,24 +198,29 @@ var game = {
 			return button;
 		},
 
-		fly: function (_) {
-			let fly = game.create.unit (_);
-				fly.ar = _.ar || 0;
+		enemy: function (_) {
+			let enemy = game.create.unit (_);
+				enemy.ar = _.ar || 0;
 
-			fly.ai = function () {
-				if (game.object.hero) {
-					if (game.get.ab (fly, game.object.hero) < fly.ar) {
-						fly.vx = game.object.hero.x;
-						fly.vy = game.object.hero.y;
+				enemy.agr = function () {
+					if (game.object.hero) {
+						if (game.get.ab (enemy, game.object.hero) < enemy.ar) {
+							enemy.vx = game.object.hero.x;
+							enemy.vy = game.object.hero.y;
+						}
 					}
 				}
-			}
 
-			fly.tick = function () {
-				fly.use ();
-				fly.ai ();
-				fly.go ();
-			}
+				enemy.tick = function () {
+					enemy.agr ();
+					enemy.go ();
+				}
+
+				return enemy;
+		},
+
+		fly: function (_) {
+			let fly = game.create.enemy (_);
 
 			return fly;
 		},
