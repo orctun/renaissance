@@ -72,6 +72,9 @@ var game = {
 				}
 
 				animation.linking = function () {
+					if (!game.object[animation.link.id]) {
+						delete game.object[animation.id];
+					}
 					if (animation.link) {
 						animation.x = animation.link.x;
 						animation.y = animation.link.y;
@@ -160,9 +163,22 @@ var game = {
 
 		bullet: function (_) {
 			let bullet = game.create.unit (_);
+				bullet.damage = _.damage || 1;
+				bullet.enemy = _.enemy || 'enemy';
+
 				bullet.destroy = function () {
 					if (bullet.vr < bullet.speed) {
 						delete game.object[bullet.id];
+						game.draw (true);
+					} else {
+						for (let id in game.object) {
+							if (game.object[id].type == bullet.enemy) {
+								if (game.get.binbox (bullet, game.object[id])) {
+									game.object[id].hp[0] -= bullet.damage;
+									delete game.object[bullet.id];
+								}
+							}
+						}
 					}
 				}
 
@@ -170,6 +186,7 @@ var game = {
 					bullet.go ();
 					bullet.destroy ();
 				}
+
 			return bullet;
 		},
 
@@ -216,6 +233,7 @@ var game = {
 		enemy: function (_) {
 			let enemy = game.create.unit (_);
 				enemy.ar = _.ar || 0;
+				enemy.type = 'enemy';
 
 				enemy.agr = function () {
 					if (game.object.hero) {
@@ -239,12 +257,21 @@ var game = {
 							z: enemy.z
 						}).load ();
 					} else {
+						game.object[enemy.id + 'bar'].w = enemy.hp[0];
 						game.object[enemy.id + 'bar'].x = enemy.x;
 						game.object[enemy.id + 'bar'].y = enemy.y - 10;
 					}
 				}
 
+				enemy.death = function () {
+					if (enemy.hp[0] <= 0) {
+
+						delete game.object[enemy.id];
+					}
+				}
+
 				enemy.tick = function () {
+					enemy.death ();
 					enemy.bar ();
 					enemy.agr ();
 					enemy.go ();
