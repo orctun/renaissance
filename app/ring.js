@@ -226,7 +226,26 @@ var game = {
 					}
 				}
 
+				enemy.bar = function () {
+					if (!game.object[enemy.id + 'bar']) {
+						window.console.log ('cr');
+						game.create.box ({
+							fill: '#f00',
+							h: 5,
+							id: enemy.id + 'bar',
+							w: enemy.hp[0],
+							x: enemy.x,
+							y: enemy.y - 10,
+							z: enemy.z
+						}).load ();
+					} else {
+						game.object[enemy.id + 'bar'].x = enemy.x;
+						game.object[enemy.id + 'bar'].y = enemy.y - 10;
+					}
+				}
+
 				enemy.tick = function () {
+					enemy.bar ();
 					enemy.agr ();
 					enemy.go ();
 				}
@@ -236,6 +255,7 @@ var game = {
 
 		fly: function (_) {
 			let fly = game.create.enemy (_);
+				fly.hp = _.hp;
 
 			return fly;
 		},
