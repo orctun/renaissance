@@ -93,9 +93,11 @@ game.scene.begin = function () {
 game.scene.begin1 = function () {
 	game.wipe ();
 
-	game.create.sprite ({ h: 377, i: game.i.arena, w: 597, x: 340, y: 150}).load ();
+	let arena = { h: 377, i: game.i.arena, w: 597, x: 340, y: 150};
 
-	game.create.block ({ h: 84, i: game.i.roof, w: 731, x: 270, y: 65, z: 1}).load ();
+	game.create.sprite (arena).load ();
+
+	game.create.block ({ h: 84, i: game.i.roof, w: 731, x: 270, y: 66, z: 1}).load ();
 	game.create.block ({ h: 391, i: game.i.pillar, w: 54, x: 295, y: 150, z: 2}).load ();
 	game.create.block ({ h: 391, i: game.i.pillar, w: 54, x: 928, y: 150, z: 2}).load ();
 	game.create.block ({ h: 98, i: game.i.black, w: 596, x: 340, y: 520, z: 1}).load ();
@@ -104,9 +106,9 @@ game.scene.begin1 = function () {
 
 	game.create.hero ({ h: 50, hp: [10, 10], i: game.i.men, id: 'hero', phys: { h: 50, w: 20 }, speed: 7, w: 35, x: 515, y: 335, z: 1}).load ();
 
-	game.create.fly ({ ar: 150, h: 50, hp: [5, 5], i: game.i.fly, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 715, y: 335, z: 1}).load ();
+	game.create.fly ({ ar: 150, h: 50, hp: [5, 5], box: arena, i: game.i.fly, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 715, y: 335, z: 1}).load ();
 
-	game.create.fly ({ ar: 150, h: 50, hp: [5, 5], i: game.i.fly, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 715, y: 200, z: 1}).load ();
+	game.create.fly ({ ar: 150, h: 50, hp: [5, 5], box: arena, i: game.i.fly, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 715, y: 200, z: 1}).load ();
 
 }
 

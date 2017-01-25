@@ -248,26 +248,6 @@ var game = {
 					}
 				}
 
-				enemy.bar = function () {
-					if (enemy.hp[0] < enemy.hp[1]) {
-						if (!game.object[enemy.id + 'bar']) {
-							game.create.box ({
-								fill: '#f00',
-								h: 5,
-								id: enemy.id + 'bar',
-								w: enemy.hp[0],
-								x: enemy.x,
-								y: enemy.y - 10,
-								z: enemy.z
-							}).load ();
-						} else {
-							game.object[enemy.id + 'bar'].w = enemy.hp[0];
-							game.object[enemy.id + 'bar'].x = enemy.x;
-							game.object[enemy.id + 'bar'].y = enemy.y - 10;
-						}
-					}
-				}
-
 				enemy.death = function () {
 					if (enemy.hp[0] <= 0) {
 						game.play ({ name: 'win' });
@@ -346,26 +326,6 @@ var game = {
 							x: hero.x + 0.5 * hero.w,
 							y: hero.y + 0.3 * hero.h
 						}).load ();
-					}
-				}
-
-				hero.bar = function () {
-					if (hero.hp[0] < hero.hp[1]) {
-						if (!game.object[hero.id + 'bar']) {
-							game.create.box ({
-								fill: '#f00',
-								h: 5,
-								id: hero.id + 'bar',
-								w: hero.hp[0],
-								x: hero.x,
-								y: hero.y - 10,
-								z: hero.z
-							}).load ();
-						} else {
-							game.object[hero.id + 'bar'].w = hero.hp[0];
-							game.object[hero.id + 'bar'].x = hero.x;
-							game.object[hero.id + 'bar'].y = hero.y - 10;
-						}
 					}
 				}
 
@@ -522,6 +482,7 @@ var game = {
 			let unit = game.create.sprite (_);
 			unit.action = _.action || function () {};
 			unit.animation = _.animation || {};
+			unit.barcolor = _.barcolor || '#f00';
 			unit.g = _.g;
 			unit.hp = _.hp || [1, 1];
 			unit.phys = _.phys;
@@ -529,6 +490,32 @@ var game = {
 			unit.type = 'unit';
 			unit.vx = _.vx || unit.x;
 			unit.vy = _.vy || unit.y;
+
+			unit.bar = function () {
+				if (unit.hp[0] <= 0) {
+					if (game.object[unit.id + 'bar']) {
+						delete game.object[unit.id + 'bar'];
+					}
+				} else {
+					if (unit.hp[0] < unit.hp[1]) {
+						if (!game.object[unit.id + 'bar']) {
+							game.create.box ({
+								fill: unit.barcolor,
+								h: 5,
+								id: unit.id + 'bar',
+								w: unit.hp[0],
+								x: unit.x,
+								y: unit.y - 10,
+								z: unit.z
+							}).load ();
+						} else {
+							game.object[unit.id + 'bar'].w = unit.hp[0];
+							game.object[unit.id + 'bar'].x = unit.x;
+							game.object[unit.id + 'bar'].y = unit.y - 10;
+						}
+					}
+				}
+			}
 
 			unit.blocked = function () {
 				for (let id in game.object) {

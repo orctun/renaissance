@@ -1,4 +1,5 @@
 game.get.a ({
+	'fly_death': 1,
 	'fly_fly': 4,
 	'girl_go': 2,
 	'men_go': 2,
@@ -19,6 +20,7 @@ game.get.i ([
 	'logo',
 	'lvl_hospital_exit',
 	'men',
+	'men_dmg',
 	'next',
 	'octocat',
 	'pillar',
