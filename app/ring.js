@@ -158,6 +158,12 @@ var game = {
 			return box;
 		},
 
+		bullet: function (_) {
+			let bullet = game.create.unit (_);
+
+			return bullet;
+		}
+
 		button: function (_) {
 			let button = game.create.sprite (_);
 				button.action = _.action || function () {};
@@ -248,6 +254,17 @@ var game = {
 			let hero = game.create.unit (_);
 				hero.action = _.action || function () {};
 
+				hero.attack = function (event) {
+					if (event.button == 0) {
+						game.create.bullet ({
+							vx: event.x,
+							vy: event.y,
+							x: hero.x,
+							y: hero.y
+						});
+					}
+				}
+
 				hero.go = function () {
 					hero.vr = game.get.ab ({ x: hero.x, y: hero.y }, { x: hero.vx, y: hero.vy });
 					if (hero.vr > hero.speed) {
@@ -271,6 +288,10 @@ var game = {
 							hero.animation.walk = false;
 						}
 					}
+				}
+
+				hero.mousedown = function (event) {
+					hero.attack (event);
 				}
 
 				hero.tick = function () {
