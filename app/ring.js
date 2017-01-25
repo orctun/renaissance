@@ -49,6 +49,7 @@ var game = {
 			let animation = game.create.sprite (_);
 				animation.a = _.a || [new Image()];
 				animation.delay = _.delay || window.delay;
+				animation.end = _.end;
 				animation.link = _.link;
 				animation.sound = _.sound || { delay: -1 };
 				animation.sound.time = window.time;
@@ -63,6 +64,7 @@ var game = {
 							animation.step = (animation.step >= animation.a.length - 1) ? 0 : animation.step + 1;
 							animation.i = animation.a[animation.step];
 							game.zen (animation);
+							if (animation.end && (animation.step >= animation.a.length - 1)) { animation.end (); };
 						}
 					}
 				}
@@ -84,14 +86,14 @@ var game = {
 							}
 
 							if (animation.link_image) {
-								animation.link.i = animation.link_image;
+								game.object[animation.link.id].i = animation.link_image;
 								animation.link_image = undefined;
-								game.zen (animation.link);
+								game.zen (game.object[animation.link.id]);
 							}
 						} else {
 							if (animation.link_image == undefined) {
 								animation.link_image = animation.link.i.cloneNode (true);
-								animation.link.i = new Image ();
+								game.object[animation.link.id].i = new Image ();
 							}
 						}
 					}
@@ -251,7 +253,9 @@ var game = {
 
 				enemy.death = function () {
 					if (enemy.hp[0] <= 0) {
-						game.play ({ name: 'win' });
+						enemy.ai = function () {};
+						enemy.speed = 0;
+						game.play ({ name: 'win', volume: 0.2 });
 						delete game.object[enemy.id];
 					}
 				}
@@ -285,9 +289,7 @@ var game = {
 				}
 			}
 
-			game.create.animation ({ a: game.a.fly_fly, delay: 40, get stop () { }, h: fly.h, i: game.i.fly, link: fly, sound: { delay: 1000, name: 'bzz', volume: 0.2 }, x: fly.x, y: fly.y, w: fly.w, z: 1 }).load ();
-
-			game.create.animation ({ a: game.a.fly_fly, delay: 40, get stop () { }, h: 50, i: game.i.fly, link: fly, sound: { delay: 1000, name: 'bzz', volume: 0.2 }, x: fly.x, y: fly.y, w: fly.w, z: 1 }).load ();
+			game.create.animation ({ a: game.a.fly_fly, delay: 40, get stop () { return !fly.animation.walk; }, h: fly.h, i: game.i.fly, link: fly, sound: { delay: 1000, name: 'bzz', volume: 0.2 }, x: fly.x, y: fly.y, w: fly.w, z: 1 }).load ();
 
 			return fly;
 		},
@@ -378,7 +380,6 @@ var game = {
 					hero.bar ();
 					hero.use ();
 					hero.vector ();
-					hero.gravity ();
 					hero.go ();
 				}
 
@@ -555,12 +556,14 @@ var game = {
 					unit.y = v.y;
 
 					if (!unit.blocked ()) {
+						unit.animation.walk = true;
 						unit.move (v.x, v.y);
 					} else {
 						unit.x = x;
 						unit.y = y;
 						unit.vx = x;
 						unit.vy = y;
+						unit.animation.walk = false;
 					}
 
 				} else {
@@ -568,18 +571,9 @@ var game = {
 				}
 			}
 
-			unit.gravity = function () {
-				if (unit.g) {
-					if (!unit.blocked ()) {
-						unit.vy += (unit.vy + unit.h + unit.g < canvas.height) ? unit.g : 0;
-					}
-				}
-			}
-
 			unit.tick = function () {
 				unit.use ();
 				unit.vector ();
-				unit.gravity ();
 				unit.go ();
 			}
 

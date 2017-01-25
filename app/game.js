@@ -1,4 +1,4 @@
-game.scene.load = function () { game.scene.begin1 (); }
+game.scene.load = function () { game.scene.menu (); }
 
 game.scene.begin = function () {
 	game.wipe ();
@@ -108,7 +108,7 @@ game.scene.begin1 = function () {
 
 	game.create.text ({ align: 'center', color: '#fff', font: 'Arial', id: 'tip_move', size: 25,  text: '[Обучение] Прежде, чем завершить обучение, вы должны научиться постоять за себя', x: 640, y: 670, z: 1 }).load ();
 
-	game.create.hero ({ h: 50, hp: [10, 10], i: game.i.men, id: 'hero', phys: { h: 50, w: 20 }, speed: 7, w: 35, x: 515, y: 335, z: 1}).load ();
+	game.create.hero ({ h: 50, hp: [10, 10], i: game.i.men, phys: { h: 50, w: 20 }, speed: 7, w: 35, x: 515, y: 335, z: 1}).load ();
 
 	game.create.fly ({ ar: 150, h: 50, hp: [5, 5], box: arena, i: game.i.fly, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 715, y: 335, z: 1}).load ();
 
