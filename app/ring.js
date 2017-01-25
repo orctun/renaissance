@@ -237,6 +237,7 @@ var game = {
 			let enemy = game.create.unit (_);
 				enemy.ai = _.ai || function () {};
 				enemy.ar = _.ar || 0;
+				enemy.damage = _.damage || 1;
 				enemy.type = 'enemy';
 
 				enemy.agr = function () {
@@ -268,10 +269,12 @@ var game = {
 
 		fly: function (_) {
 			let fly = game.create.enemy (_);
-				fly.box = _.box || { h: canvas.height, w: canvas.width, x: 0, y: 0 }
+				fly.box = _.box || { h: canvas.height, w: canvas.width, x: 0, y: 0 };
+				fly.h = _.h || 50;
 				fly.hp = _.hp;
 				fly.reaction = game.get.r (1, 10, true) * 500;
 				fly.time = window.time;
+				fly.w = _.w || 35;
 
 			fly.ai = function () {
 				if (window.time - fly.time > fly.reaction) {
@@ -282,7 +285,9 @@ var game = {
 				}
 			}
 
-			game.create.animation ({ a: game.a.fly_fly, delay: 40, get stop () { }, h: 50, i: game.i.fly, link: fly, sound: { delay: 1000, name: 'bzz', volume: 0.2 }, x: fly.x, y: fly.y, w: 35, z: 1 }).load ();
+			game.create.animation ({ a: game.a.fly_fly, delay: 40, get stop () { }, h: fly.h, i: game.i.fly, link: fly, sound: { delay: 1000, name: 'bzz', volume: 0.2 }, x: fly.x, y: fly.y, w: fly.w, z: 1 }).load ();
+
+			game.create.animation ({ a: game.a.fly_fly, delay: 40, get stop () { }, h: 50, i: game.i.fly, link: fly, sound: { delay: 1000, name: 'bzz', volume: 0.2 }, x: fly.x, y: fly.y, w: fly.w, z: 1 }).load ();
 
 			return fly;
 		},
@@ -329,6 +334,16 @@ var game = {
 					}
 				}
 
+				hero.attacked = function () {
+					for (let id in game.object) {
+						if (game.object[id].type == 'enemy') {
+							if (game.get.binbox (hero, game.object[id])) {
+								hero.hp[0] -= game.object[id].damage;
+							}
+						}
+					}
+				}
+
 				hero.go = function () {
 					hero.vr = game.get.ab ({ x: hero.x, y: hero.y }, { x: hero.vx, y: hero.vy });
 					if (hero.vr > hero.speed) {
@@ -359,6 +374,7 @@ var game = {
 				}
 
 				hero.tick = function () {
+					hero.attacked ();
 					hero.bar ();
 					hero.use ();
 					hero.vector ();

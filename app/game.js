@@ -6,6 +6,7 @@ game.scene.begin = function () {
 	game.create.sprite ({ h: 500, i: game.i.black, w: 640, x: 0, y: 0}).load ();
 	game.create.sprite ({ h: 500, i: game.i.black, w: 640, x: 640, y: 0}).load ();
 
+	//down
 	game.create.sprite ({ h: 30, i: game.i.black, w: 1000, x: 140, y: 670}).load ();
 
 	//left
@@ -96,6 +97,9 @@ game.scene.begin1 = function () {
 	let arena = { h: 377, i: game.i.arena, w: 597, x: 340, y: 150};
 
 	game.create.sprite (arena).load ();
+
+	//down
+	game.create.sprite ({ h: 30, i: game.i.black, w: 1000, x: 140, y: 670}).load ();
 
 	game.create.block ({ h: 84, i: game.i.roof, w: 731, x: 270, y: 66, z: 1}).load ();
 	game.create.block ({ h: 391, i: game.i.pillar, w: 54, x: 295, y: 150, z: 2}).load ();

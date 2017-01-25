@@ -17,6 +17,7 @@ game.get.i ([
 	'girl',
 	'go',
 	'intro4',
+	'lime',
 	'logo',
 	'lvl_hospital_exit',
 	'men',
