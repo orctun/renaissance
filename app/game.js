@@ -1,4 +1,4 @@
-game.scene.load = function () { game.scene.begin (); }
+game.scene.load = function () { game.scene.begin1 (); }
 
 game.scene.begin = function () {
 	game.wipe ();

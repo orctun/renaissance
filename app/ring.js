@@ -288,11 +288,18 @@ var game = {
 
 		fly: function (_) {
 			let fly = game.create.enemy (_);
-				fly.aibox = _.aibox || { h: canvas.height, w: canvas.width, x: 0, y: 0 }
+				fly.box = _.box || { h: canvas.height, w: canvas.width, x: 0, y: 0 }
 				fly.hp = _.hp;
+				fly.reaction = game.get.r (1, 10, true) * 500;
+				fly.time = window.time;
 
 			fly.ai = function () {
-
+				if (window.time - fly.time > fly.reaction) {
+					fly.time = window.time;
+					fly.reaction = game.get.r (1, 10, true) * 500;
+					fly.vx = game.get.r (fly.box.x, fly.box.x + fly.box.w);
+					fly.vy = game.get.r (fly.box.y, fly.box.y + fly.box.h);
+				}
 			}
 
 			game.create.animation ({ a: game.a.fly_fly, delay: 40, get stop () { }, h: 50, i: game.i.fly, link: fly, sound: { delay: 1000, name: 'bzz', volume: 0.2 }, x: fly.x, y: fly.y, w: 35, z: 1 }).load ();
