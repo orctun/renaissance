@@ -160,9 +160,18 @@ var game = {
 
 		bullet: function (_) {
 			let bullet = game.create.unit (_);
+				bullet.destroy = function () {
+					if (bullet.vr < bullet.speed) {
+						delete game.object[bullet.id];
+					}
+				}
 
+				bullet.tick = function () {
+					bullet.go ();
+					bullet.destroy ();
+				}
 			return bullet;
-		}
+		},
 
 		button: function (_) {
 			let button = game.create.sprite (_);
@@ -256,12 +265,17 @@ var game = {
 
 				hero.attack = function (event) {
 					if (event.button == 0) {
+						window.console.log ('1');
 						game.create.bullet ({
+							h: 10,
+							i: game.i.borderblue,
+							speed: 10,
 							vx: event.x,
 							vy: event.y,
+							w: 10,
 							x: hero.x,
 							y: hero.y
-						});
+						}).load ();
 					}
 				}
 
