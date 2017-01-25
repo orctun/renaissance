@@ -1,4 +1,4 @@
-game.scene.load = function () { game.scene.begin1 (); }
+game.scene.load = function () { game.scene.begin (); }
 
 game.scene.begin = function () {
 	game.wipe ();
@@ -37,15 +37,31 @@ game.scene.begin = function () {
 	//yellow trigger
 	let tip_move_action = game.create.text ({ align: 'center', color: '#ff0', font: 'Arial', id: 'tip_move_action', size: 25,  text: '[Обучение] Часто нужно просто подойти, чтобы что-то активировать', x: 640, y: 670, z: 1 });
 
-	game.create.gate ({ action: function () { game.play ({ name: 'open' }); delete game.object.wall, delete game.object.tip_move; tip_move_action.load (); delete game.object.gate; game.draw (true); }, h: 100, i: game.i.gateborderblue, id: 'gate', repeat: true, w: 50, x: 580, y: 390, z: 1}).load ();
+	game.create.gate ({
+		action: function () {
+			game.play ({ name: 'open' });
+			delete game.object.wall;
+			delete game.object.tip_move;
+			tip_move_action.load ();
+			delete game.object.gate;
+			game.draw (true);
+		},
+		h: 100,
+		i: game.i.gateborderblue,
+		id: 'gate',
+		inside: 'unit',
+		repeat: true,
+		w: 50,
+		x: 580,
+		y: 390,
+		z: 1
+	}).load ();
 
 	//exit
 	game.create.gate ({ action: function () { game.play ({ name: 'open' }); game.scene.begin1 (); }, h: 25, i: game.i.up, w: 25, x: 680, y: 10, z: 1}).load ();
 
-	//hero
-	let hero = game.create.unit ({ h: 50, i: game.i.men, phys: { h: 50, w: 20 }, speed: 7, w: 35, x: 414, y: 300, z: 1});
+	let hero = game.create.hero ({ h: 50, i: game.i.men, phys: { h: 50, w: 20 }, speed: 7, w: 35, x: 414, y: 300, z: 1});
 		hero.load ();
-	game.create.animation ({ a: game.a.men_go, delay: 150, get stop () { return !hero.animation.walk; }, h: 50, i: game.i.men, link: hero, sound: { delay: 400, name: 'step', volume: 0.5 }, x: hero.x, y: hero.y, w: 35, z: 1 }).load ();
 
 	//red trigger
 	let tip_action = game.create.text ({ align: 'center', color: '#f00', font: 'Arial', id: 'tip_move_action', size: 25,  text: '[Обучение] Иногда потребуется нажать SPACE', x: 640, y: 670, z: 1 });
@@ -86,9 +102,7 @@ game.scene.begin1 = function () {
 
 	game.create.text ({ align: 'center', color: '#fff', font: 'Arial', id: 'tip_move', size: 25,  text: '[Обучение] Прежде, чем завершить обучение, вы должны научиться постоять за себя', x: 640, y: 670, z: 1 }).load ();
 
-	let hero = game.create.hero ({ h: 50, i: game.i.men, id: 'hero', phys: { h: 50, w: 20 }, speed: 7, w: 35, x: 515, y: 335, z: 1});
-		hero.load ();
-	game.create.animation ({ a: game.a.men_go, delay: 150, get stop () { return !hero.animation.walk; }, h: 50, i: game.i.men, link: hero, sound: { delay: 400, name: 'step', volume: 0.5 }, x: hero.x, y: hero.y, w: 35, z: 1 }).load ();
+	game.create.hero ({ h: 50, i: game.i.men, id: 'hero', phys: { h: 50, w: 20 }, speed: 7, w: 35, x: 515, y: 335, z: 1}).load ();
 
 	game.create.fly ({ ar: 150, h: 50, hp: [5, 5], i: game.i.fly, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 715, y: 335, z: 1}).load ();
 

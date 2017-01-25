@@ -72,10 +72,10 @@ var game = {
 				}
 
 				animation.linking = function () {
-					if (!game.object[animation.link.id]) {
-						delete game.object[animation.id];
-					}
 					if (animation.link) {
+						if (!game.object[animation.link.id]) {
+							delete game.object[animation.id];
+						}
 						animation.x = animation.link.x;
 						animation.y = animation.link.y;
 						if (animation.stop) {
@@ -98,10 +98,12 @@ var game = {
 				}
 
 				animation.play = function () {
-					if (!animation.stop) {
-						if (window.time - animation.sound.time >= animation.sound.delay) {
-							animation.sound.time = window.time;
-							game.play (animation.sound);
+					if (animation.sound.delay != -1) {
+						if (!animation.stop) {
+							if (window.time - animation.sound.time >= animation.sound.delay) {
+								animation.sound.time = window.time;
+								game.play (animation.sound);
+							}
 						}
 					}
 				}
@@ -165,6 +167,7 @@ var game = {
 			let bullet = game.create.unit (_);
 				bullet.damage = _.damage || 1;
 				bullet.enemy = _.enemy || 'enemy';
+				bullet.type = 'bullet';
 
 				bullet.destroy = function () {
 					if (bullet.vr < bullet.speed) {
@@ -245,20 +248,22 @@ var game = {
 				}
 
 				enemy.bar = function () {
-					if (!game.object[enemy.id + 'bar']) {
-						game.create.box ({
-							fill: '#f00',
-							h: 5,
-							id: enemy.id + 'bar',
-							w: enemy.hp[0],
-							x: enemy.x,
-							y: enemy.y - 10,
-							z: enemy.z
-						}).load ();
-					} else {
-						game.object[enemy.id + 'bar'].w = enemy.hp[0];
-						game.object[enemy.id + 'bar'].x = enemy.x;
-						game.object[enemy.id + 'bar'].y = enemy.y - 10;
+					if (enemy.hp[0] < enemy.hp[1]) {
+						if (!game.object[enemy.id + 'bar']) {
+							game.create.box ({
+								fill: '#f00',
+								h: 5,
+								id: enemy.id + 'bar',
+								w: enemy.hp[0],
+								x: enemy.x,
+								y: enemy.y - 10,
+								z: enemy.z
+							}).load ();
+						} else {
+							game.object[enemy.id + 'bar'].w = enemy.hp[0];
+							game.object[enemy.id + 'bar'].x = enemy.x;
+							game.object[enemy.id + 'bar'].y = enemy.y - 10;
+						}
 					}
 				}
 
@@ -291,11 +296,12 @@ var game = {
 		gate: function (_) {
 			let gate = game.create.sprite (_);
 					gate.action = _.action || function () {};
+					gate.inside = _.inside || 'unit';
 					gate.type = 'gate';
 
 					gate.enter = function () {
 						for (let id in game.object) {
-							if (game.object[id].type == 'unit') {
+							if (game.object[id].type == gate.inside) {
 								if (game.get.binbox (gate, game.object[id])) { gate.action (); return true; }
 							}
 						}
@@ -310,6 +316,8 @@ var game = {
 		hero: function (_) {
 			let hero = game.create.unit (_);
 				hero.action = _.action || function () {};
+
+				game.create.animation ({ a: game.a.men_go, delay: 150, get stop () { return !hero.animation.walk; }, h: 50, i: game.i.men, link: hero, sound: { delay: 400, name: 'step', volume: 0.5 }, x: hero.x, y: hero.y, w: 35, z: 1 }).load ();
 
 				hero.attack = function (event) {
 					if (event.button == 0) {
