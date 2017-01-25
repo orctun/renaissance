@@ -265,10 +265,10 @@ var game = {
 
 				hero.attack = function (event) {
 					if (event.button == 0) {
-						window.console.log ('1');
+						game.play ({ name: 'shoot', volume: 0.2 });
 						game.create.bullet ({
 							h: 10,
-							i: game.i.borderblue,
+							i: game.i.blue,
 							speed: 10,
 							vx: event.x,
 							vy: event.y,
