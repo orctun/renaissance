@@ -235,6 +235,7 @@ var game = {
 
 		enemy: function (_) {
 			let enemy = game.create.unit (_);
+				enemy.ai = _.ai || function () {};
 				enemy.ar = _.ar || 0;
 				enemy.type = 'enemy';
 
@@ -276,6 +277,7 @@ var game = {
 
 				enemy.tick = function () {
 					enemy.death ();
+					enemy.ai ();
 					enemy.bar ();
 					enemy.agr ();
 					enemy.go ();
@@ -286,7 +288,12 @@ var game = {
 
 		fly: function (_) {
 			let fly = game.create.enemy (_);
+				fly.aibox = _.aibox || { h: canvas.height, w: canvas.width, x: 0, y: 0 }
 				fly.hp = _.hp;
+
+			fly.ai = function () {
+
+			}
 
 			game.create.animation ({ a: game.a.fly_fly, delay: 40, get stop () { }, h: 50, i: game.i.fly, link: fly, sound: { delay: 1000, name: 'bzz', volume: 0.2 }, x: fly.x, y: fly.y, w: 35, z: 1 }).load ();
 
@@ -335,6 +342,26 @@ var game = {
 					}
 				}
 
+				hero.bar = function () {
+					if (hero.hp[0] < hero.hp[1]) {
+						if (!game.object[hero.id + 'bar']) {
+							game.create.box ({
+								fill: '#f00',
+								h: 5,
+								id: hero.id + 'bar',
+								w: hero.hp[0],
+								x: hero.x,
+								y: hero.y - 10,
+								z: hero.z
+							}).load ();
+						} else {
+							game.object[hero.id + 'bar'].w = hero.hp[0];
+							game.object[hero.id + 'bar'].x = hero.x;
+							game.object[hero.id + 'bar'].y = hero.y - 10;
+						}
+					}
+				}
+
 				hero.go = function () {
 					hero.vr = game.get.ab ({ x: hero.x, y: hero.y }, { x: hero.vx, y: hero.vy });
 					if (hero.vr > hero.speed) {
@@ -365,6 +392,7 @@ var game = {
 				}
 
 				hero.tick = function () {
+					hero.bar ();
 					hero.use ();
 					hero.vector ();
 					hero.gravity ();
