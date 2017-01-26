@@ -35,5 +35,6 @@ game.get.i ([
 	'up',
 	'void',
 	'wall',
-	'wall_green'
+	'wall_green',
+	'white'
 ]);

@@ -174,7 +174,7 @@ var game = {
 				bullet.destroy = function () {
 					if (bullet.vr < bullet.speed) {
 						delete game.object[bullet.id];
-						game.draw (true);
+						game.zen (bullet);
 					} else {
 						for (let id in game.object) {
 							if (game.object[id].type == bullet.enemy) {

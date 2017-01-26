@@ -1,4 +1,4 @@
-game.scene.load = function () { game.scene.begin1 (); }
+game.scene.load = function () { game.scene.hospital (); }
 
 game.scene.begin = function () {
 	game.wipe ();
@@ -167,6 +167,9 @@ game.scene.hospital = function () {
 
 	game.create.block ({ h: 140, i: game.i.wall, repeat: true, w: 990, x: 290, y: 0, z: 1}).load ();
 	game.create.sprite ({ h: 45, i: game.i.wall_green, repeat: true, w: 990, x: 290, y: 140}).load ();
+
+	game.create.sprite ({ h: 268, i: game.i.white, repeat: true, w: 640, x: 0, y: 185}).load ();
+	game.create.sprite ({ h: 268, i: game.i.white, repeat: true, w: 640, x: 640, y: 185}).load ();
 
 	game.create.gate ({ h: 90, i: game.i.black, in: function () { game.play ({ name: 'open' }); game.scene.menu (); }, w: 98, x: 190, y: 42, z: 1}).load ();
 
