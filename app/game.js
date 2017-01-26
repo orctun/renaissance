@@ -1,4 +1,4 @@
-game.scene.load = function () { game.scene.begin1 (); }
+game.scene.load = function () { game.scene.hospital (); }
 
 game.scene.begin = function () {
 	game.wipe ();
@@ -164,19 +164,27 @@ game.scene.hospital = function () {
 	game.create.sprite ({ h: 185, i: game.i.lvl_hospital_exit, w: 102, x: 188, y: 0}).load ();
 
 	game.create.block ({ h: 140, i: game.i.wall, repeat: true, w: 188, x: 0, y: 0, z: 1}).load ();
-	game.create.sprite ({ h: 45, i: game.i.wall_green, repeat: true, w: 188, x: 0, y: 140}).load ();
+	game.create.block ({ h: 45, i: game.i.wall_green, repeat: true, w: 188, x: 0, y: 140}).load ();
 
 	game.create.block ({ h: 140, i: game.i.wall, repeat: true, w: 990, x: 290, y: 0, z: 1}).load ();
-	game.create.sprite ({ h: 45, i: game.i.wall_green, repeat: true, w: 990, x: 290, y: 140}).load ();
+	game.create.block ({ h: 45, i: game.i.wall_green, repeat: true, w: 990, x: 290, y: 140}).load ();
 
-	game.create.sprite ({ h: 268, i: game.i.white, repeat: true, w: 640, x: 0, y: 185}).load ();
-	game.create.sprite ({ h: 267, i: game.i.white, repeat: true, w: 640, x: 0, y: 453}).load ();
-	game.create.sprite ({ h: 268, i: game.i.white, repeat: true, w: 640, x: 640, y: 185}).load ();
-	game.create.sprite ({ h: 267, i: game.i.white, repeat: true, w: 640, x: 640, y: 453}).load ();
+	//floor
+	game.create.sprite ({ h: 272, i: game.i.medfloor, w: 640, x: 0, y: 185}).load ();
+	game.create.sprite ({ h: 272, i: game.i.medfloor, w: 640, x: 0, y: 457}).load ();
+	game.create.sprite ({ h: 272, i: game.i.medfloor, w: 640, x: 640, y: 185}).load ();
+	game.create.sprite ({ h: 272, i: game.i.medfloor, w: 640, x: 640, y: 457}).load ();
+
+	//beds
+	game.create.block ({ h: 77, i: game.i.medbed, w: 42, x: 650, y: 200}).load ();
+	game.create.block ({ h: 77, i: game.i.medbed, w: 42, x: 700, y: 200}).load ();
+	game.create.block ({ h: 77, i: game.i.medbed, w: 42, x: 750, y: 200}).load ();
+	game.create.block ({ h: 77, i: game.i.medbed, w: 42, x: 800, y: 200}).load ();
+	game.create.block ({ h: 77, i: game.i.medbed, w: 42, x: 850, y: 200}).load ();
 
 	game.create.gate ({ h: 90, i: game.i.black, in: function () { game.play ({ name: 'open' }); game.scene.menu (); }, w: 98, x: 190, y: 42, z: 1}).load ();
 
-	let hero = game.create.hero ({ h: 50, i: game.i.men, speed: 7, w: 35, weapon: 'shoot', x: 500, y: 300, z: 1});
+	let hero = game.create.hero ({ h: 50, i: game.i.men, phys: { h: 10, w: 20 }, speed: 7, w: 35, weapon: 'shoot', x: 500, y: 300, z: 1});
 		hero.load ();
 }
 

@@ -570,7 +570,7 @@ var game = {
 					if (game.object[id].type == 'block') {
 						let phys = unit.phys || unit;
 							phys.x = unit.x + 0.5 * (unit.w - phys.w);
-							phys.y = unit.y + 0.5 * (unit.h - unit.h);
+							phys.y = unit.y + (unit.h - phys.h);
 						if (game.get.binbox (phys, game.object[id])) { return true; }
 					}
 				}

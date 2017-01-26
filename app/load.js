@@ -24,6 +24,8 @@ game.get.i ([
 	'lime',
 	'logo',
 	'lvl_hospital_exit',
+	'medbed', //85 154
+	'medfloor', //641 273
 	'men',
 	'menred',
 	'next',
