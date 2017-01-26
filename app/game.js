@@ -111,9 +111,9 @@ game.scene.begin1 = function () {
 	let hero = game.create.hero ({ h: 50, hp: [10, 10], i: game.i.men, phys: { h: 50, w: 20 }, speed: 7, w: 35, weapon: 'shoot', x: 515, y: 335, z: 1});
 		hero.load ();
 
-	game.create.fly ({ ar: 150, h: 50, hp: [5, 5], box: arena, phys: { h: 50, w: 20 }, i: game.i.fly, speed: 4, w: 35, x: 715, y: 335, z: 1}).load ();
+	game.create.fly ({ ar: 120, h: 50, hp: [10, 10], box: arena, phys: { h: 50, w: 20 }, i: game.i.fly, speed: 4, w: 35, x: 715, y: 335, z: 1}).load ();
 
-	game.create.fly ({ ar: 150, h: 50, hp: [5, 5], box: arena, i: game.i.fly, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 715, y: 200, z: 1}).load ();
+	game.create.fly ({ ar: 120, h: 50, hp: [10, 10], box: arena, i: game.i.fly, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 715, y: 200, z: 1}).load ();
 
 	let next = true;
 	game.create.timer ({
@@ -170,7 +170,9 @@ game.scene.hospital = function () {
 	game.create.sprite ({ h: 45, i: game.i.wall_green, repeat: true, w: 990, x: 290, y: 140}).load ();
 
 	game.create.sprite ({ h: 268, i: game.i.white, repeat: true, w: 640, x: 0, y: 185}).load ();
+	game.create.sprite ({ h: 267, i: game.i.white, repeat: true, w: 640, x: 0, y: 453}).load ();
 	game.create.sprite ({ h: 268, i: game.i.white, repeat: true, w: 640, x: 640, y: 185}).load ();
+	game.create.sprite ({ h: 267, i: game.i.white, repeat: true, w: 640, x: 640, y: 453}).load ();
 
 	game.create.gate ({ h: 90, i: game.i.black, in: function () { game.play ({ name: 'open' }); game.scene.menu (); }, w: 98, x: 190, y: 42, z: 1}).load ();
 

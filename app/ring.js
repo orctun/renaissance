@@ -243,10 +243,16 @@ var game = {
 				enemy.type = 'enemy';
 
 				enemy.agr = function () {
-					if (game.object.hero) {
-						if (game.get.ab (enemy, game.object.hero) < enemy.ar) {
-							enemy.vx = game.object.hero.x;
-							enemy.vy = game.object.hero.y;
+					let hero;
+					for (let id in game.object) {
+						if (game.object[id].meta == 'hero') {
+							hero = game.object[id];
+						}
+					}
+					if (hero) {
+						if (game.get.ab (enemy, hero) < enemy.ar) {
+							enemy.vx = hero.x;
+							enemy.vy = hero.y;
 						}
 					}
 				}
@@ -327,6 +333,7 @@ var game = {
 		hero: function (_) {
 			let hero = game.create.unit (_);
 				hero.action = _.action || function () {};
+				hero.meta = 'hero';
 				hero.weapon = _.weapon || 'none';
 
 				game.create.animation ({ a: game.a.men_go, delay: 150, get stop () { return !hero.animation.walk; }, h: 50, i: game.i.men, link: hero, sound: { delay: 400, name: 'step', volume: 0.5 }, x: hero.x, y: hero.y, w: 35, z: 1 }).load ();
@@ -550,7 +557,7 @@ var game = {
 								z: unit.z
 							}).load ();
 						} else {
-							game.object[unit.id + 'bar'].w = unit.hp[0];
+							game.object[unit.id + 'bar'].w = unit.hp[0] * 2;
 							game.object[unit.id + 'bar'].x = unit.x;
 							game.object[unit.id + 'bar'].y = unit.y - 10;
 						}
