@@ -196,8 +196,9 @@ game.scene.hospital = function () {
 
 	game.create.gate ({ h: 90, i: game.i.black, in: function () { game.play ({ name: 'open' }); game.scene.menu (); }, w: 98, x: 190, y: 42, z: 1}).load ();
 
-	let hero = game.create.hero ({ h: 50, i: game.i.men, phys: { h: 10, w: 20 }, speed: 7, w: 35, weapon: 'shoot', x: 500, y: 300, z: 1});
-		hero.load ();
+	let hero = game.create.hero ({ h: 50, i: game.i.men, phys: { h: 10, w: 20 }, speed: 7, w: 35, x: 500, y: 300, z: 1}); hero.load ();
+
+	game.create.npc ({ h: 50, i: game.i.med1, phys: { h: 10, w: 20 }, speed: 7, w: 35, x: 1200, y: 200 }).load ();
 }
 
 game.scene.intro = function () {

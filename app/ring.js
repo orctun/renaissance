@@ -444,6 +444,12 @@ var game = {
 			return link;
 		},
 
+		npc: function (_) {
+			let npc = game.create.unit (_);
+				npc.type = 'block';
+			return npc;
+		},
+
 		object: function (_) {
 			let object = _ || {};
 				object.id = _.id || game.id++;
