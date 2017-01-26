@@ -1,4 +1,4 @@
-game.scene.load = function () { game.scene.menu (); }
+game.scene.load = function () { game.scene.begin1 (); }
 
 game.scene.begin = function () {
 	game.wipe ();
@@ -114,6 +114,23 @@ game.scene.begin1 = function () {
 
 	game.create.fly ({ ar: 150, h: 50, hp: [5, 5], box: arena, i: game.i.fly, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 715, y: 200, z: 1}).load ();
 
+	let next = true;
+	game.create.timer ({
+		action: function () {
+			if (next) {
+				let win = true;
+				for (let id in game.object) {
+					if (game.object[id].type == 'enemy') { win = false }
+				}
+				if (win) {
+					next = false;
+					game.create.text ({ align: 'center', color: '#f00', font: 'Arial', id: 'tip_move', size: 25,  text: '[Обучение] Поздравляю, теперь вы готовы! Для продолжения войдите в центр круга и нажмите SPACE', x: 640, y: 670, z: 1 }).load ();
+					game.draw (true);
+				}
+			}
+		},
+		interval: 1000
+	}).load ();
 }
 
 game.scene.hospital = function () {

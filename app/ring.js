@@ -487,8 +487,8 @@ var game = {
 
 				timer.tick = function () {
 					if (window.time - timer.time >= timer.interval) {
-						timer.action ();
 						timer.time = window.time;
+						timer.action ();		
 					}
 				}
 
