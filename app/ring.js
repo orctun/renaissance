@@ -763,7 +763,10 @@ var game = {
 
 	wipe: function () {
 		game.object = {};
-		if (game.ost.src) game.ost.pause ();
+		if (game.ost.src) {
+			game.ost.pause ();
+		}
+		delete game.ost;
 		context.clearRect (0, 0, canvas.width, canvas.height);
 		canvas.style.cursor = 'url(data/cursorose.png), default';
 	},

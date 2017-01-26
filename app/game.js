@@ -129,12 +129,18 @@ game.scene.begin1 = function () {
 					game.create.gate ({
 						h: 120,
 						in: function () {
+							if (!game.ost) {
+								game.play ({ name: 'main', ost: true, volume: 0.5 });
+							} else {
+								game.ost.volume = 0.5;
+							}
+
 							hero.action = function () {
-								game.play ({ name: 'open' });
 								game.scene.hospital ();
 							}
 						},
 						out: function () {
+							game.ost.volume = 0.3;
 							hero.action = function () {};
 						},
 						w: 120,
