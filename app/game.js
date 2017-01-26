@@ -175,12 +175,24 @@ game.scene.hospital = function () {
 	game.create.sprite ({ h: 272, i: game.i.medfloor, w: 640, x: 640, y: 185}).load ();
 	game.create.sprite ({ h: 272, i: game.i.medfloor, w: 640, x: 640, y: 457}).load ();
 
-	//beds
-	game.create.block ({ h: 77, i: game.i.medbed, w: 42, x: 650, y: 200}).load ();
-	game.create.block ({ h: 77, i: game.i.medbed, w: 42, x: 700, y: 200}).load ();
-	game.create.block ({ h: 77, i: game.i.medbed, w: 42, x: 750, y: 200}).load ();
-	game.create.block ({ h: 77, i: game.i.medbed, w: 42, x: 800, y: 200}).load ();
-	game.create.block ({ h: 77, i: game.i.medbed, w: 42, x: 850, y: 200}).load ();
+	//bed
+	game.create.block ({ h: 77, i: game.i.medbed, w: 42, x: 650 + 100, y: 200}).load ();
+	game.create.block ({ h: 77, i: game.i.medbed, w: 42, x: 700 + 100, y: 200}).load ();
+	game.create.block ({ h: 77, i: game.i.medbed2, w: 42, x: 750 + 100, y: 200}).load ();
+	game.create.block ({ h: 77, i: game.i.medbed, w: 42, x: 800 + 100, y: 200}).load ();
+	game.create.block ({ h: 77, i: game.i.medbed, w: 42, x: 850 + 100, y: 200}).load ();
+
+	game.create.block ({ h: 77, i: game.i.medbed, w: 42, x: 650 + 100, y: 300}).load ();
+	game.create.block ({ h: 77, i: game.i.medbed2, w: 42, x: 700 + 100, y: 300}).load ();
+	game.create.block ({ h: 77, i: game.i.medbed, w: 42, x: 750 + 100, y: 300}).load ();
+	game.create.block ({ h: 77, i: game.i.medbed, w: 42, x: 800 + 100, y: 300}).load ();
+	game.create.block ({ h: 77, i: game.i.medbed2, w: 42, x: 850 + 100, y: 300}).load ();
+
+	//box
+	game.create.block ({ h: 90, i: game.i.medbox, w: 67, x: 1100, y: 100, z: 1}).load ();
+
+	//wall
+	game.create.block ({ h: 457, i: game.i.wall, repeat: true, w: 20, x: 620, y: 0}).load ();
 
 	game.create.gate ({ h: 90, i: game.i.black, in: function () { game.play ({ name: 'open' }); game.scene.menu (); }, w: 98, x: 190, y: 42, z: 1}).load ();
 
