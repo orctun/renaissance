@@ -1,4 +1,4 @@
-game.scene.load = function () { game.scene.hospital (); }
+game.scene.load = function () { game.scene.begin1 (); }
 
 game.scene.begin = function () {
 	game.wipe ();
@@ -68,7 +68,9 @@ game.scene.begin = function () {
 	let tip_action = game.create.text ({ align: 'center', color: '#f00', font: 'Arial', id: 'tip_move_action', size: 25,  text: '[Обучение] Иногда потребуется нажать SPACE', x: 640, y: 670, z: 1 });
 
 	game.create.gate ({
-		action: function () {
+		h: 50,
+		i: game.i.redzone,
+		in: function () {
 			game.play ({ name: 'bom' });
 			delete game.object.tip_move_action;
 			tip_action.load ();
@@ -80,8 +82,6 @@ game.scene.begin = function () {
 				game.draw (true);
 			}
 		},
-		h: 50,
-		i: game.i.redzone,
 		id: 'gatered',
 		repeat: true,
 		w: 80,
@@ -108,10 +108,10 @@ game.scene.begin1 = function () {
 
 	game.create.text ({ align: 'center', color: '#fff', font: 'Arial', id: 'tip_move', size: 25,  text: '[Обучение] Прежде, чем завершить обучение, вы должны научиться постоять за себя', x: 640, y: 670, z: 1 }).load ();
 
-	let hero = game.create.hero ({ h: 50, hp: [10, 10], i: game.i.men, phys: { h: 50, w: 20 }, speed: 7, w: 35, x: 515, y: 335, z: 1});
+	let hero = game.create.hero ({ h: 50, hp: [10, 10], i: game.i.men, phys: { h: 50, w: 20 }, speed: 7, w: 35, weapon: 'shoot', x: 515, y: 335, z: 1});
 		hero.load ();
 
-	game.create.fly ({ ar: 150, h: 50, hp: [5, 5], box: arena, i: game.i.fly, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 715, y: 335, z: 1}).load ();
+	game.create.fly ({ ar: 150, h: 50, hp: [5, 5], box: arena, phys: { h: 50, w: 20 }, i: game.i.fly, speed: 4, w: 35, x: 715, y: 335, z: 1}).load ();
 
 	game.create.fly ({ ar: 150, h: 50, hp: [5, 5], box: arena, i: game.i.fly, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 715, y: 200, z: 1}).load ();
 
@@ -129,10 +129,11 @@ game.scene.begin1 = function () {
 					game.create.gate ({
 						h: 120,
 						in: function () {
-							if (!game.ost) {
+							if (!game.ost.src) {
 								game.play ({ name: 'main', ost: true, volume: 0.5 });
 							} else {
 								game.ost.volume = 0.5;
+								game.ost.play ();
 							}
 
 							hero.action = function () {
@@ -173,12 +174,13 @@ game.scene.hospital = function () {
 
 	game.create.gate ({ h: 90, i: game.i.black, in: function () { game.play ({ name: 'open' }); game.scene.menu (); }, w: 98, x: 190, y: 42, z: 1}).load ();
 
-	let hero = game.create.hero ({ h: 50, i: game.i.men, speed: 7, w: 35, x: 500, y: 300, z: 1});
+	let hero = game.create.hero ({ h: 50, i: game.i.men, speed: 7, w: 35, weapon: 'shoot', x: 500, y: 300, z: 1});
 		hero.load ();
 }
 
 game.scene.intro = function () {
 	game.wipe ();
+	game.create.sprite ({ h: 720, i: game.i.intro, w: 1280, x: 0, y: 0}).load ();
 	game.create.button ({ action: function () { game.play ({ name: 'click' }); game.scene.intro2 (); }, h: 15, i: game.i.next, w: 25, x: 1080, y: 420 }).load ();
 	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'Arial', size: 25,
 		text: 'Люди победили смерть и научислись воскрешать себя благодаря Частице Бога,', x: 640, y: 340 }).load ();
@@ -188,6 +190,7 @@ game.scene.intro = function () {
 
 game.scene.intro2 = function () {
 	game.wipe ();
+	game.create.sprite ({ h: 720, i: game.i.intro2, w: 1280, x: 0, y: 0}).load ();
 	game.create.button ({ action: function () { game.play ({ name: 'click' }); game.scene.intro3 (); }, h: 15, i: game.i.next, w: 25, x: 1080, y: 420 }).load ();
 	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'Arial', size: 25,
 		text: 'Возрождение коснулось всех живых существ планеты,', x: 640, y: 340 }).load ();
@@ -197,6 +200,7 @@ game.scene.intro2 = function () {
 
 game.scene.intro3 = function () {
 	game.wipe ();
+	game.create.sprite ({ h: 720, i: game.i.intro3, w: 1280, x: 0, y: 0}).load ();
 	game.create.button ({ action: function () { game.play ({ name: 'click' }); game.scene.intro4 (); }, h: 15, i: game.i.next, w: 25, x: 1080, y: 420 }).load ();
 	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'Arial', size: 25,
 		text: 'После череды мировых войн за ресурсы стало ясно, что война бесполезна.', x: 640, y: 320 }).load ();

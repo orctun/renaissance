@@ -273,12 +273,9 @@ var game = {
 
 		fly: function (_) {
 			let fly = game.create.enemy (_);
-				fly.box = _.box || { h: canvas.height, w: canvas.width, x: 0, y: 0 };
-				fly.h = _.h || 50;
-				fly.hp = _.hp;
+				fly.i = _.i || game.i.fly;
 				fly.reaction = game.get.r (1, 10, true) * 500;
 				fly.time = window.time;
-				fly.w = _.w || 35;
 
 			fly.ai = function () {
 				if (window.time - fly.time > fly.reaction) {
@@ -299,6 +296,7 @@ var game = {
 					gate.in = _.in || function () {};
 					gate.inside = _.inside || 'unit';
 					gate.insider = {};
+					gate.out = _.out || function () {};
 					gate.type = 'gate';
 
 					gate.enter = function () {
@@ -308,6 +306,7 @@ var game = {
 									if (!gate.insider[id]) {
 										gate.insider[id] = true;
 										gate.in ();
+										return true;
 									}
 								} else {
 									if (gate.insider[id]) {
@@ -328,22 +327,27 @@ var game = {
 		hero: function (_) {
 			let hero = game.create.unit (_);
 				hero.action = _.action || function () {};
+				hero.weapon = _.weapon || 'none';
 
 				game.create.animation ({ a: game.a.men_go, delay: 150, get stop () { return !hero.animation.walk; }, h: 50, i: game.i.men, link: hero, sound: { delay: 400, name: 'step', volume: 0.5 }, x: hero.x, y: hero.y, w: 35, z: 1 }).load ();
 
 				hero.attack = function (event) {
 					if (event.button == 0) {
-						game.play ({ name: 'shoot', volume: 0.2 });
-						game.create.bullet ({
-							h: 10,
-							i: game.i.blue,
-							speed: 10,
-							vx: event.x,
-							vy: event.y,
-							w: 10,
-							x: hero.x + 0.5 * hero.w,
-							y: hero.y + 0.3 * hero.h
-						}).load ();
+						switch (hero.weapon) {
+							case 'shoot':
+								game.play ({ name: 'shoot', volume: 0.1 });
+								game.create.bullet ({
+									h: 10,
+									i: game.i.blue,
+									speed: 10,
+									vx: event.x,
+									vy: event.y,
+									w: 10,
+									x: hero.x + 0.5 * hero.w,
+									y: hero.y + 0.3 * hero.h
+								}).load ();
+								break;
+						}
 					}
 				}
 
@@ -444,6 +448,12 @@ var game = {
 			return object;
 		},
 
+		octocat: function (_) {
+			let octocat = game.create.enemy (_);
+
+			return octocat;
+		},
+
 		sprite: function (_) {
 			let sprite = game.create.box (_);
 					sprite.i = _.i || new Image ();
@@ -511,13 +521,16 @@ var game = {
 			unit.action = _.action || function () {};
 			unit.animation = _.animation || {};
 			unit.barcolor = _.barcolor || '#f00';
+			unit.box = _.box || { h: canvas.height, w: canvas.width, x: 0, y: 0 };
 			unit.g = _.g;
+			unit.h = _.h || 50;
 			unit.hp = _.hp || [1, 1];
 			unit.phys = _.phys;
 			unit.speed = _.speed || 1;
 			unit.type = 'unit';
 			unit.vx = _.vx || unit.x;
 			unit.vy = _.vy || unit.y;
+			unit.w = _.w || 50;
 
 			unit.bar = function () {
 				if (unit.hp[0] <= 0) {
@@ -766,7 +779,6 @@ var game = {
 		if (game.ost.src) {
 			game.ost.pause ();
 		}
-		delete game.ost;
 		context.clearRect (0, 0, canvas.width, canvas.height);
 		canvas.style.cursor = 'url(data/cursorose.png), default';
 	},
