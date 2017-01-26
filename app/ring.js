@@ -93,7 +93,7 @@ var game = {
 						} else {
 							if (animation.link_image == undefined) {
 								animation.link_image = animation.link.i.cloneNode (true);
-								game.object[animation.link.id].i = new Image ();
+								animation.link.i = new Image ();
 							}
 						}
 					}
@@ -296,17 +296,24 @@ var game = {
 
 		gate: function (_) {
 			let gate = game.create.sprite (_);
-					gate.action = _.action || function () {};
+					gate.in = _.in || function () {};
 					gate.inside = _.inside || 'unit';
+					gate.insider = {};
 					gate.type = 'gate';
 
 					gate.enter = function () {
 						for (let id in game.object) {
 							if (game.object[id].type == gate.inside) {
 								if (game.get.binbox (gate, game.object[id])) {
-									gate.in = true;
-									gate.action ();
-									return true;
+									if (!gate.insider[id]) {
+										gate.insider[id] = true;
+										gate.in ();
+									}
+								} else {
+									if (gate.insider[id]) {
+										gate.insider[id] = false;
+										gate.out ();
+									}
 								}
 							}
 						}

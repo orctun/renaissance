@@ -39,7 +39,10 @@ game.scene.begin = function () {
 	let tip_move_action = game.create.text ({ align: 'center', color: '#ff0', font: 'Arial', id: 'tip_move_action', size: 25,  text: '[Обучение] Часто нужно просто подойти, чтобы что-то активировать', x: 640, y: 670, z: 1 });
 
 	game.create.gate ({
-		action: function () {
+		h: 100,
+		i: game.i.gateborderblue,
+		id: 'gate',
+		in: function () {
 			game.play ({ name: 'open' });
 			delete game.object.wall;
 			delete game.object.tip_move;
@@ -47,9 +50,6 @@ game.scene.begin = function () {
 			delete game.object.gate;
 			game.draw (true);
 		},
-		h: 100,
-		i: game.i.gateborderblue,
-		id: 'gate',
 		inside: 'unit',
 		repeat: true,
 		w: 50,
@@ -59,7 +59,7 @@ game.scene.begin = function () {
 	}).load ();
 
 	//exit
-	game.create.gate ({ action: function () { game.play ({ name: 'open' }); game.scene.begin1 (); }, h: 25, i: game.i.up, w: 25, x: 680, y: 10, z: 1}).load ();
+	game.create.gate ({ h: 25, i: game.i.up, in: function () { game.play ({ name: 'open' }); game.scene.begin1 (); }, w: 25, x: 680, y: 10, z: 1}).load ();
 
 	let hero = game.create.hero ({ h: 50, i: game.i.men, phys: { h: 50, w: 20 }, speed: 7, w: 35, x: 414, y: 300, z: 1});
 		hero.load ();
@@ -127,14 +127,16 @@ game.scene.begin1 = function () {
 					next = false;
 
 					game.create.gate ({
-						action: function () {
+						h: 120,
+						in: function () {
 							hero.action = function () {
 								game.play ({ name: 'open' });
 								game.scene.hospital ();
 							}
 						},
-						h: 120,
-						i: game.i.borderblue,
+						out: function () {
+							hero.action = function () {};
+						},
 						w: 120,
 						x: 575,
 						y: 275,
@@ -160,11 +162,10 @@ game.scene.hospital = function () {
 	game.create.block ({ h: 140, i: game.i.wall, repeat: true, w: 990, x: 290, y: 0, z: 1}).load ();
 	game.create.sprite ({ h: 45, i: game.i.wall_green, repeat: true, w: 990, x: 290, y: 140}).load ();
 
-	game.create.gate ({ action: function () { game.play ({ name: 'open' }); game.scene.menu (); }, h: 90, i: game.i.black, w: 98, x: 190, y: 42, z: 1}).load ();
+	game.create.gate ({ h: 90, i: game.i.black, in: function () { game.play ({ name: 'open' }); game.scene.menu (); }, w: 98, x: 190, y: 42, z: 1}).load ();
 
-	let hero = game.create.unit ({ h: 50, i: game.i.men, speed: 7, w: 35, x: 500, y: 300, z: 1});
+	let hero = game.create.hero ({ h: 50, i: game.i.men, speed: 7, w: 35, x: 500, y: 300, z: 1});
 		hero.load ();
-	game.create.animation ({ a: game.a.men_go, delay: 150, get stop () { return !hero.animation.walk; }, h: 50, i: game.i.men, link: hero, sound: { delay: 400, name: 'step', volume: 0.5 }, x: 500, y: 300, w: 35, z: 1 }).load ();
 }
 
 game.scene.intro = function () {
