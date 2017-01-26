@@ -303,7 +303,11 @@ var game = {
 					gate.enter = function () {
 						for (let id in game.object) {
 							if (game.object[id].type == gate.inside) {
-								if (game.get.binbox (gate, game.object[id])) { gate.action (); return true; }
+								if (game.get.binbox (gate, game.object[id])) {
+									gate.in = true;
+									gate.action ();
+									return true;
+								}
 							}
 						}
 					}
@@ -488,7 +492,7 @@ var game = {
 				timer.tick = function () {
 					if (window.time - timer.time >= timer.interval) {
 						timer.time = window.time;
-						timer.action ();		
+						timer.action ();
 					}
 				}
 
