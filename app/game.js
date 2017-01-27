@@ -332,6 +332,7 @@ game.scene.road = function () {
 
 	//car
 	game.create.block ({ h: 92, i: game.i.bigcar, w: 176, x: 600, y: 170, z: 1}).load ();
+	game.create.block ({ h: 66, i: game.i.ucar, w: 176, x: 820, y: 0, z: 1}).load ();
 
 	//hero
 	let hero = game.create.hero ({ h: 50, i: game.i.men, speed: 7, w: 35, x: 414, y: 300, z: 1}); hero.load ();

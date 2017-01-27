@@ -53,6 +53,7 @@ game.get.i ([
 	'start',
 	'test',
 	'tribune',
+	'ucar', //88 33
 	'up',
 	'void',
 	'wall',
