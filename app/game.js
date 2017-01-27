@@ -197,14 +197,35 @@ game.scene.hospital = function () {
 	game.create.block ({ h: 50, i: game.i.wall, repeat: true, w: 60, x: 1220, y: 407}).load ();
 
 	//door
-	let door = game.create.block ({ h: 50, i: game.i.medoor, w: 60, x: 1160, y: 407}).load ();
+	let door = game.create.block ({ h: 50, i: game.i.medoor, w: 60, x: 1160, y: 407}); door.load ();
+
+	//reg
+	game.create.block ({ h: 84, i: game.i.medreg, w: 125, x: 400, y: 200, z: 1}).load ();
+
+	let reg = game.create.npc ({
+		action: function () {
+			game.object[reg.id + 'chat'].text = 'Проходите';
+			game.zen (game.object[reg.id + 'chat']);
+			delete game.object[door.id];
+			game.create.sprite ({ h: 50, i: game.i.medooropen, w: 60, x: 1160, y: 407}).load ();
+		},
+		bye: 'Всего доброго',
+		h: 50,
+		hi: 'Да?',
+		i: game.i.med1,
+		phys: { h: 10, w: 20 },
+		speed: 7,
+		w: 35,
+		x: 450,
+		y: 200
+	}); reg.load ();
 
 	//exit
 	game.create.gate ({ h: 90, i: game.i.black, in: function () { game.play ({ name: 'open' }); game.scene.menu (); }, w: 98, x: 190, y: 42, z: 1}).load ();
 
 	let hero = game.create.hero ({ h: 50, i: game.i.men, phys: { h: 10, w: 20 }, speed: 7, w: 35, x: 500, y: 300, z: 1}); hero.load ();
 
-	let npc = game.create.npc ({ action: function () { game.object[npc.id + 'chat'].text = 'Приходи позже'; game.zen (game.object[this.id + 'chat']); }, bye: 'Будь здоров', h: 50, hi: 'Опять ты', i: game.i.med, phys: { h: 10, w: 20 }, speed: 7, w: 35, x: 1200, y: 200 }); npc.load ();
+	let npc = game.create.npc ({ action: function () { game.object[npc.id + 'chat'].text = 'Ничего нет'; game.zen (game.object[reg.id + 'chat']); }, bye: 'Будь здоров', h: 50, hi: 'Опять ты', i: game.i.med, phys: { h: 10, w: 20 }, speed: 7, w: 35, x: 1200, y: 200 }); npc.load ();
 }
 
 game.scene.intro = function () {

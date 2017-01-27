@@ -32,6 +32,7 @@ game.get.i ([
 	'medoor',
 	'medooropen',
 	'medfloor', //640 272
+	'medreg', //250 166
 	'men',
 	'menred',
 	'next',
