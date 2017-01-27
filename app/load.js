@@ -40,6 +40,8 @@ game.get.i ([
 	'men',
 	'menred',
 	'navibo',
+	'navibo1',
+	'navibo2',
 	'next',
 	'octocat',
 	'pillar',
