@@ -130,7 +130,7 @@ var game = {
 			arm.ai = function () {
 				if (window.time - arm.time > arm.reaction) {
 					arm.time = window.time;
-					arm.reaction = game.get.r (0, 10, true) * 1000;
+					arm.reaction = game.get.r (0, 5, true) * 1000;
 					arm.vx = game.get.r (arm.box.x, arm.box.x + arm.box.w);
 					arm.vy = game.get.r (arm.box.y, arm.box.y + arm.box.h);
 				}
