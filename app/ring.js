@@ -446,7 +446,58 @@ var game = {
 
 		npc: function (_) {
 			let npc = game.create.unit (_);
+				npc.action = _.action || function () {};
+				npc.actived = false;
+				npc.bye = _.bye || 'bye';
+				npc.hi = _.hi || 'hi';
 				npc.type = 'block';
+
+				npc.active = function () {
+					game.create.text ({
+						color: '#000',
+						fill: '#fff',
+						id: npc.id + 'bubble',
+						text: npc.hi,
+						x: npc.x - 0.5 * npc.w,
+						y: npc.y - 0.5 * npc.h
+					}).load ();
+				}
+
+				npc.chat = function () {
+					for (let id in game.object) {
+						if (game.object[id].meta == 'hero') {
+							if (game.get.binbox (npc, game.object[id])) {
+								if (!npc.actived) {
+									npc.actived = true;
+									npc.active ();
+									game.object[id].action = npc.action;
+								}
+							} else {
+								if (npc.actived) {
+									npc.actived = false;
+									npc.deactive ();
+									game.object[id].action = function () {};
+								}
+							}
+						}
+					}
+				}
+
+				npc.deactive = function () {
+					game.create.text ({
+						color: '#000',
+						fill: '#fff',
+						id: npc.id + 'bubble',
+						text: npc.bye,
+						x: npc.x - 0.5 * npc.w,
+						y: npc.y - 0.5 * npc.h
+					}).load ();
+				}
+
+				npc.tick = function () {
+					npc.chat ();
+				}
+
 			return npc;
 		},
 

@@ -198,7 +198,7 @@ game.scene.hospital = function () {
 
 	let hero = game.create.hero ({ h: 50, i: game.i.men, phys: { h: 10, w: 20 }, speed: 7, w: 35, x: 500, y: 300, z: 1}); hero.load ();
 
-	game.create.npc ({ h: 50, i: game.i.med1, phys: { h: 10, w: 20 }, speed: 7, w: 35, x: 1200, y: 200 }).load ();
+	game.create.npc ({ bye: 'Будь здоров', h: 50, hi: 'Опять ты', i: game.i.med, phys: { h: 10, w: 20 }, speed: 7, w: 35, x: 1200, y: 200 }).load ();
 }
 
 game.scene.intro = function () {
