@@ -136,6 +136,7 @@ var game = {
 				}
 			}
 
+
 			game.create.animation ({ a: game.a[arm.r + '_go'], delay: 150, get stop () { return !arm.animation.walk; }, h: arm.h, i: arm.i, link: arm, sound: { delay: 1000, name: 'step', volume: 0.1 }, x: arm.x, y: arm.y, w: arm.w, z: 1 }).load ();
 
 			return arm;

@@ -297,9 +297,9 @@ game.scene.navibo = function () {
 	game.create.sprite ({ h: 720, i: game.i.navibo, w: 1280, x: 0, y: 0}).load ();
 	game.create.button ({ action: function () { game.play ({ name: 'click' }); game.scene.hospital (); }, h: 15, i: game.i.next, w: 25, x: 1080, y: 420 }).load ();
 	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'Arial', size: 25,
-		text: 'Навибо смерть не избавляла от мигрени, как других землян', x: 640, y: 340 }).load ();
+		text: 'Навибо смерть не избавляла от мигрени, как других землян.', x: 640, y: 340 }).load ();
 	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'Arial', size: 25,
-			text: 'лишь лекартсва и наркотики могли облегчить его боль', x: 640, y: 380 }).load ();
+			text: 'Лишь лекартсва и наркотики могли облегчить его боль', x: 640, y: 380 }).load ();
 }
 
 game.scene.navibo1 = function () {
@@ -325,23 +325,35 @@ game.scene.road = function () {
 	game.create.block ({ h: 200, i: game.i.red, w: 100, x: 100, y: 300, z: 1}).load ();
 	game.create.block ({ h: 200, i: game.i.red, w: 200, x: 300, y: 400, z: 1}).load ();
 	game.create.block ({ h: 200, i: game.i.red, w: 150, x: 300, y: 100, z: 1}).load ();
-	game.create.block ({ h: 200, i: game.i.red, w: 150, x: 600, y: 0, z: 1}).load ();
+	game.create.block ({ h: 150, i: game.i.red, w: 150, x: 600, y: 0, z: 1}).load ();
 	game.create.block ({ h: 200, i: game.i.red, w: 150, x: 900, y: 300, z: 1}).load ();
 	game.create.block ({ h: 120, i: game.i.red, w: 150, x: 700, y: 600, z: 1}).load ();
 	game.create.block ({ h: 200, i: game.i.red, w: 200, x: 1100, y: 0, z: 1}).load ();
 
+	//car
+	game.create.block ({ h: 92, i: game.i.bigcar, w: 176, x: 600, y: 170, z: 1}).load ();
+
 	//hero
-	let hero = game.create.hero ({ h: 50, i: game.i.men, phys: { h: 50, w: 20 }, speed: 7, w: 35, x: 414, y: 300, z: 1}); hero.load ();
+	let hero = game.create.hero ({ h: 50, i: game.i.men, speed: 7, w: 35, x: 414, y: 300, z: 1}); hero.load ();
 
 	//enemy
-	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, phys: { h: 50, w: 20 }, speed: 7, w: 35, x: 600, y: 300, z: 1}).load ();
+	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 7, w: 35, x: 600, y: 300, z: 1}).load ();
 
-	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
-
-	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
+	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
+	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
+	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
+	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
+	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
+	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
+	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
+	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
+	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
 
 	//exit
 	game.create.gate ({ h: 25, i: game.i.up, in: function () { game.play ({ name: 'open' }); game.scene.begin1 (); }, w: 25, x: 900, y: 50, z: 1}).load ();
+
+	//sound
+	game.play ({ name: 'speak', ost: true, volume: 0.2 });
 }
 
 game.scene.select = function () {

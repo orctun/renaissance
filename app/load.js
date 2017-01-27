@@ -13,6 +13,7 @@ game.get.i ([
 	'arena',
 	'arm',
 	'arm1',
+	'bigcar', //88 46
 	'black',
 	'blue',
 	'borderblue',
