@@ -303,6 +303,16 @@ game.scene.navibo = function () {
 			text: 'лишь лекартсва и наркотики могли облегчить эту боль', x: 640, y: 380 }).load ();
 }
 
+game.scene.navibo1 = function () {
+	game.wipe ();
+	game.create.sprite ({ h: 720, i: game.i.navibo, w: 1280, x: 0, y: 0}).load ();
+	game.create.button ({ action: function () { game.play ({ name: 'click' }); game.scene.hospital (); }, h: 15, i: game.i.next, w: 25, x: 1080, y: 420 }).load ();
+	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'Arial', size: 25,
+		text: 'Не получив лекарства, Навибо отправился к барыге.', x: 640, y: 340 }).load ();
+	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'Arial', size: 25,
+			text: 'Дорогу ему преградил минивэн с военными..', x: 640, y: 380 }).load ();
+}
+
 game.scene.select = function () {
 	game.wipe ();
 

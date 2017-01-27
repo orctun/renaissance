@@ -1,4 +1,6 @@
 game.get.a ({
+	'arm_go': 2,
+	'arm1_go': 2,
 	'fly_death': 1,
 	'fly_fly': 4,
 	'girl_go': 2,
@@ -9,6 +11,8 @@ game.get.a ({
 
 game.get.i ([
 	'arena',
+	'arm',
+	'arm1',
 	'black',
 	'blue',
 	'borderblue',
