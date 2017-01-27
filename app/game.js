@@ -337,17 +337,18 @@ game.scene.road = function () {
 	let hero = game.create.hero ({ h: 50, i: game.i.men, speed: 7, w: 35, x: 414, y: 300, z: 1}); hero.load ();
 
 	//enemy
-	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 7, w: 35, x: 600, y: 300, z: 1}).load ();
+	let go = function () { game.scene.road (); };
+	game.create.arm ({ active: go, ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 7, w: 35, x: 600, y: 300, z: 1}).load ();
 
-	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
-	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
-	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
-	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
-	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
-	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
-	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
-	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
-	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
+	game.create.arm ({ active: go, ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
+	game.create.arm ({ active: go, ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
+	game.create.arm ({ active: go, ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
+	game.create.arm ({ active: go, ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
+	game.create.arm ({ active: go, ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
+	game.create.arm ({ active: go, ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
+	game.create.arm ({ active: go, ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
+	game.create.arm ({ active: go, ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
+	game.create.arm ({ active: go, ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
 
 	//exit
 	game.create.gate ({ h: 25, i: game.i.up, in: function () { game.play ({ name: 'open' }); game.scene.begin1 (); }, w: 25, x: 900, y: 50, z: 1}).load ();

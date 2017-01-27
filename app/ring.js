@@ -127,15 +127,54 @@ var game = {
 				arm.reaction = game.get.r (1, 10, true) * 500;
 				arm.time = window.time;
 
-			arm.ai = function () {
-				if (window.time - arm.time > arm.reaction) {
-					arm.time = window.time;
-					arm.reaction = game.get.r (0, 5, true) * 1000;
-					arm.vx = game.get.r (arm.box.x, arm.box.x + arm.box.w);
-					arm.vy = game.get.r (arm.box.y, arm.box.y + arm.box.h);
-				}
-			}
+				arm.action = _.action || function () {};
+				arm.actived = false;
+				arm.bye = _.bye || 'bye';
+				arm.hi = _.hi || 'hi';
 
+				arm.active = _.active || function () {};
+
+				arm.ai = function () {
+					if (window.time - arm.time > arm.reaction) {
+						arm.time = window.time;
+						arm.reaction = game.get.r (0, 5, true) * 1000;
+						arm.vx = game.get.r (arm.box.x, arm.box.x + arm.box.w);
+						arm.vy = game.get.r (arm.box.y, arm.box.y + arm.box.h);
+					}
+				}
+
+				arm.chat = function () {
+					for (let id in game.object) {
+						if (game.object[id].meta == 'hero') {
+							if (game.get.binbox (arm, game.object[id])) {
+								if (!arm.actived) {
+									arm.actived = true;
+									arm.active ();
+									game.object[id].action = arm.action;
+								}
+							} else {
+								if (arm.actived) {
+									arm.actived = false;
+									arm.deactive ();
+									game.object[id].action = function () {};
+								}
+							}
+						}
+					}
+				}
+
+				arm.deactive = function () {
+
+				}
+
+				arm.tick = function () {
+					arm.chat ();
+					arm.death ();
+					arm.ai ();
+					arm.bar ();
+					arm.agr ();
+					arm.go ();
+				}
 
 			game.create.animation ({ a: game.a[arm.r + '_go'], delay: 150, get stop () { return !arm.animation.walk; }, h: arm.h, i: arm.i, link: arm, sound: { delay: 1000, name: 'step', volume: 0.1 }, x: arm.x, y: arm.y, w: arm.w, z: 1 }).load ();
 
