@@ -1,4 +1,4 @@
-game.scene.load = function () { game.scene.hospital (); }
+game.scene.load = function () { game.scene.road (); }
 
 game.scene.begin = function () {
 	game.wipe ();
@@ -61,8 +61,7 @@ game.scene.begin = function () {
 	//exit
 	game.create.gate ({ h: 25, i: game.i.up, in: function () { game.play ({ name: 'open' }); game.scene.begin1 (); }, w: 25, x: 680, y: 10, z: 1}).load ();
 
-	let hero = game.create.hero ({ h: 50, i: game.i.men, phys: { h: 50, w: 20 }, speed: 7, w: 35, x: 414, y: 300, z: 1});
-		hero.load ();
+	let hero = game.create.hero ({ h: 50, i: game.i.men, phys: { h: 50, w: 20 }, speed: 7, w: 35, x: 414, y: 300, z: 1}); hero.load ();
 
 	//red trigger
 	let tip_action = game.create.text ({ align: 'center', color: '#f00', font: 'Arial', id: 'tip_move_action', size: 25,  text: '[Обучение] Иногда потребуется нажать SPACE', x: 640, y: 670, z: 1 });
@@ -306,11 +305,35 @@ game.scene.navibo = function () {
 game.scene.navibo1 = function () {
 	game.wipe ();
 	game.create.sprite ({ h: 720, i: game.i.navibo1, w: 1280, x: 0, y: 0}).load ();
-	game.create.button ({ action: function () { game.play ({ name: 'click' }); game.scene.hospital (); }, h: 15, i: game.i.next, w: 25, x: 1080, y: 420 }).load ();
+	game.create.button ({ action: function () { game.play ({ name: 'click' }); game.scene.road (); }, h: 15, i: game.i.next, w: 25, x: 1080, y: 420 }).load ();
 	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'Arial', size: 25,
 		text: 'Не получив лекарства, Навибо отправился к барыге.', x: 640, y: 340 }).load ();
 	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'Arial', size: 25,
 			text: 'Дорогу ему преградил минивэн с военными..', x: 640, y: 380 }).load ();
+}
+
+game.scene.road = function () {
+	game.wipe ();
+
+	game.create.sprite ({ h: 360, i: game.i.black, w: 640, x: 0, y: 0}).load ();
+	game.create.sprite ({ h: 360, i: game.i.black, w: 640, x: 640, y: 0}).load ();
+	game.create.sprite ({ h: 360, i: game.i.black, w: 640, x: 0, y: 360}).load ();
+	game.create.sprite ({ h: 360, i: game.i.black, w: 640, x: 640, y: 360}).load ();
+
+	//box
+	game.create.block ({ h: 200, i: game.i.red, w: 100, x: 110, y: 260, z: 1}).load ();
+
+	//hero
+	let hero = game.create.hero ({ h: 50, i: game.i.men, phys: { h: 50, w: 20 }, speed: 7, w: 35, x: 414, y: 300, z: 1}); hero.load ();
+
+	//enemy
+	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, phys: { h: 50, w: 20 }, speed: 5, w: 35, x: 600, y: 200, z: 1}).load ();
+
+	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, phys: { h: 50, w: 20 }, speed: 7, w: 35, x: 600, y: 300, z: 1}).load ();
+
+	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
+
+	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();	game.create.arm ({ ar: 150, h: 50, hp: [5, 5], i: game.i.arm, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
 }
 
 game.scene.select = function () {

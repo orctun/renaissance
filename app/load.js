@@ -46,6 +46,7 @@ game.get.i ([
 	'octocat',
 	'pillar',
 	'ready',
+	'red',
 	'redzone',
 	'roof',
 	'start',

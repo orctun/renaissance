@@ -119,6 +119,28 @@ var game = {
 			return animation;
 		},
 
+		arm: function (_) {
+			let arm = game.create.enemy (_);
+				arm.r = (game.get.r (0, 1, true) == 0) ? 'arm' : 'arm1';
+
+				arm.i = game.i[arm.r];
+				arm.reaction = game.get.r (1, 10, true) * 500;
+				arm.time = window.time;
+
+			arm.ai = function () {
+				if (window.time - arm.time > arm.reaction) {
+					arm.time = window.time;
+					arm.reaction = game.get.r (0, 10, true) * 1000;
+					arm.vx = game.get.r (arm.box.x, arm.box.x + arm.box.w);
+					arm.vy = game.get.r (arm.box.y, arm.box.y + arm.box.h);
+				}
+			}
+
+			game.create.animation ({ a: game.a[arm.r + '_go'], delay: 150, get stop () { return !arm.animation.walk; }, h: arm.h, i: arm.i, link: arm, sound: { delay: 1000, name: 'step', volume: 0.1 }, x: arm.x, y: arm.y, w: arm.w, z: 1 }).load ();
+
+			return arm;
+		},
+
 		block: function (_) {
 			let block = game.create.sprite (_);
 					block.type = 'block';
