@@ -192,8 +192,11 @@ game.scene.hospital = function () {
 	game.create.block ({ h: 90, i: game.i.medbox, w: 67, x: 1100, y: 100, z: 1}).load ();
 
 	//wall
-	game.create.block ({ h: 457, i: game.i.wall, repeat: true, w: 20, x: 620, y: 0}).load ();
+	game.create.block ({ h: 457, i: game.i.wall, repeat: true, w: 20, x: 640, y: 0}).load ();
+	game.create.block ({ h: 50, i: game.i.wall, repeat: true, w: 500, x: 660, y: 407}).load ();
+	game.create.block ({ h: 50, i: game.i.wall, repeat: true, w: 60, x: 1220, y: 407}).load ();
 
+	//exit
 	game.create.gate ({ h: 90, i: game.i.black, in: function () { game.play ({ name: 'open' }); game.scene.menu (); }, w: 98, x: 190, y: 42, z: 1}).load ();
 
 	let hero = game.create.hero ({ h: 50, i: game.i.men, phys: { h: 10, w: 20 }, speed: 7, w: 35, x: 500, y: 300, z: 1}); hero.load ();
