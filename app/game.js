@@ -196,12 +196,15 @@ game.scene.hospital = function () {
 	game.create.block ({ h: 50, i: game.i.wall, repeat: true, w: 500, x: 660, y: 407}).load ();
 	game.create.block ({ h: 50, i: game.i.wall, repeat: true, w: 60, x: 1220, y: 407}).load ();
 
+	//door
+	let door = game.create.block ({ h: 50, i: game.i.medoor, w: 60, x: 1160, y: 407}).load ();
+
 	//exit
 	game.create.gate ({ h: 90, i: game.i.black, in: function () { game.play ({ name: 'open' }); game.scene.menu (); }, w: 98, x: 190, y: 42, z: 1}).load ();
 
 	let hero = game.create.hero ({ h: 50, i: game.i.men, phys: { h: 10, w: 20 }, speed: 7, w: 35, x: 500, y: 300, z: 1}); hero.load ();
 
-	game.create.npc ({ bye: 'Будь здоров', h: 50, hi: 'Опять ты', i: game.i.med, phys: { h: 10, w: 20 }, speed: 7, w: 35, x: 1200, y: 200 }).load ();
+	let npc = game.create.npc ({ action: function () { game.object[npc.id + 'chat'].text = 'Приходи позже'; game.zen (game.object[this.id + 'chat']); }, bye: 'Будь здоров', h: 50, hi: 'Опять ты', i: game.i.med, phys: { h: 10, w: 20 }, speed: 7, w: 35, x: 1200, y: 200 }); npc.load ();
 }
 
 game.scene.intro = function () {

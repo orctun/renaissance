@@ -456,7 +456,7 @@ var game = {
 					game.create.text ({
 						color: '#000',
 						fill: '#fff',
-						id: npc.id + 'bubble',
+						id: npc.id + 'chat',
 						text: npc.hi,
 						x: npc.x - 0.5 * npc.w,
 						y: npc.y - 0.5 * npc.h
@@ -487,7 +487,7 @@ var game = {
 					game.create.text ({
 						color: '#000',
 						fill: '#fff',
-						id: npc.id + 'bubble',
+						id: npc.id + 'chat',
 						text: npc.bye,
 						x: npc.x - 0.5 * npc.w,
 						y: npc.y - 0.5 * npc.h

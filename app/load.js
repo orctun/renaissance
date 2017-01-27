@@ -29,6 +29,8 @@ game.get.i ([
 	'medbed', //85 154
 	'medbed2', //85 154
 	'medbox', //135 139
+	'medoor',
+	'medooropen',
 	'medfloor', //640 272
 	'men',
 	'menred',
