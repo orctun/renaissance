@@ -35,6 +35,7 @@ game.get.i ([
 	'medreg', //250 166
 	'men',
 	'menred',
+	'navibo',
 	'next',
 	'octocat',
 	'pillar',
