@@ -181,6 +181,53 @@ var game = {
 			return arm;
 		},
 
+		armcar: function (_) {
+			let armcar = game.create.unit (_);
+				armcar.action = _.action || function () {};
+				armcar.active = _.active || function () {};
+				armcar.actived = false;
+				armcar.bye = _.bye || 'bye';
+				armcar.hi = _.hi || 'hi';
+
+				armcar.ai = function () {
+					if (armcar.y < canvas.height) {
+						armcar.vy += armcar.speed;
+					} else {
+						delete game.object[armcar.id];
+					}
+				}
+
+				armcar.chat = function () {
+					for (let id in game.object) {
+						if (game.object[id].meta == 'hero') {
+							if (game.get.binbox (armcar, game.object[id])) {
+								if (!armcar.actived) {
+									armcar.actived = true;
+									armcar.active ();
+									game.object[id].action = armcar.action;
+								}
+							} else {
+								if (armcar.actived) {
+									armcar.actived = false;
+									armcar.deactive ();
+									game.object[id].action = function () {};
+								}
+							}
+						}
+					}
+				}
+
+				armcar.deactive = function () {}
+
+				armcar.tick = function () {
+					armcar.chat ();
+					armcar.ai ();
+					armcar.go ();
+				}
+
+			return armcar;
+		},
+
 		block: function (_) {
 			let block = game.create.sprite (_);
 					block.type = 'block';
@@ -295,6 +342,65 @@ var game = {
 				}
 
 			return button;
+		},
+
+		car: function (_) {
+			let car = game.create.unit (_);
+				car.meta = 'hero';
+
+			car.go = function () {
+				car.vr = game.get.ab ({ x: car.x, y: car.y }, { x: car.vx, y: car.vy });
+				if (car.vr > car.speed) {
+					let v = game.get.abr ({ x: car.x, y: car.y }, { x: car.vx, y: car.vy }, car.speed);
+					let x = car.x;
+					let y = car.y;
+					car.x = v.x;
+					car.y = v.y;
+
+					if (!car.blocked ()) {
+						car.move (v.x, v.y);
+					} else {
+						car.x = x;
+						car.y = y;
+						car.vx = x;
+						car.vy = y;
+					}
+
+				} else {
+					if (!game.key.A && !game.key.D && !game.key.S && !game.key.W) {
+						car.animation.walk = false;
+					}
+				}
+			}
+
+			car.vector = function () {
+				if (game.key.A) {
+					car.vx = (car.vx > 0) ? car.vx - car.speed : car.vx;
+					car.animation.walk = true;
+				}
+
+				if (game.key.D) {
+					car.vx = (car.vx + car.w < canvas.width) ? car.vx + car.speed : car.vx;
+					car.animation.walk = true;
+				}
+
+				if (game.key.S) {
+					car.vy = (car.vy + car.h < canvas.height) ? car.vy + car.speed : car.vy;
+					car.animation.walk = true;
+				}
+
+				if (game.key.W) {
+					car.vy = (car.vy > 0) ? car.vy - car.speed : car.vy;
+					car.animation.walk = true;
+				}
+			}
+
+			car.tick = function () {
+				car.vector ();
+				car.go ();
+			}
+
+			return car;
 		},
 
 		enemy: function (_) {

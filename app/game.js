@@ -1,4 +1,4 @@
-game.scene.load = function () { game.scene.road (); }
+game.scene.load = function () { game.scene.roadtrip (); }
 
 game.scene.begin = function () {
 	game.wipe ();
@@ -352,10 +352,36 @@ game.scene.road = function () {
 	game.create.arm ({ active: go, ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
 
 	//exit
-	game.create.gate ({ h: 25, i: game.i.up, in: function () { game.play ({ name: 'open' }); game.scene.begin1 (); }, w: 25, x: 900, y: 50, z: 1}).load ();
+	game.create.gate ({ h: 25, i: game.i.up, in: function () { game.play ({ name: 'open' }); game.scene.roadtrip (); }, w: 25, x: 900, y: 50, z: 1}).load ();
 
 	//sound
 	game.play ({ name: 'speak', ost: true, volume: 0.2 });
+}
+
+game.scene.roadtrip = function () {
+	game.wipe ();
+
+	//road
+	game.create.animation ({ a: game.a.road_go, delay: 40, h: 720, i: game.i.road, repeat: true, w: 130, x: 611, y: 0 }).load ();
+
+	game.create.block ({ h: 720, i: game.i.black, w: 10, x: 601, y: 0 }).load ();
+	game.create.block ({ h: 720, i: game.i.black, w: 10, x: 741, y: 0 }).load ();
+
+	//car
+	game.create.car ({ h: 65, i: game.i.car, speed: 3, w: 30, x: 640, y: 600 }).load ();
+
+	//sound
+	game.play ({ name: 'bom', ost: true, volume: 0.05 });
+
+	//gameplay
+	game.create.timer ({
+		action: function () {
+			if (!game.get.r (0, 3, true)) {
+				game.create.armcar ({ active: function () { game.scene.roadtrip (); } , h: 65, i: game.i.car1, speed: game.get.r (1, 4, true), w: 30, x: game.get.r (611, 711, true), y: 0, z: 1 }).load ();
+			}
+		},
+		interval: 1000
+	}).load ();
 }
 
 game.scene.select = function () {

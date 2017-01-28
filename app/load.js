@@ -6,6 +6,7 @@ game.get.a ({
 	'girl_go': 2,
 	'men_go': 2,
 	'octocat_go': 2,
+	'road_go': 8,
 	'start': 5
 });
 
@@ -17,6 +18,8 @@ game.get.i ([
 	'black',
 	'blue',
 	'borderblue',
+	'car', //6 13
+	'car1', //6 13
 	'doc',
 	'gateborderblue',
 	'girl',
@@ -49,6 +52,7 @@ game.get.i ([
 	'ready',
 	'red',
 	'redzone',
+	'road', //33 32
 	'roof',
 	'start',
 	'test',
