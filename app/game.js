@@ -371,7 +371,7 @@ game.scene.roadtrip = function () {
 	game.create.car ({ h: 65, i: game.i.car, speed: 3, w: 30, x: 640, y: 600 }).load ();
 
 	//sound
-	game.play ({ name: 'bom', ost: true, volume: 0.05 });
+	game.play ({ name: '60', ost: true, volume: 0.05 });
 
 	//gameplay
 	game.create.timer ({

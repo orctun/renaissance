@@ -204,13 +204,12 @@ var game = {
 								if (!armcar.actived) {
 									armcar.actived = true;
 									armcar.active ();
-									game.object[id].action = armcar.action;
+									return true;
 								}
 							} else {
 								if (armcar.actived) {
 									armcar.actived = false;
 									armcar.deactive ();
-									game.object[id].action = function () {};
 								}
 							}
 						}
@@ -218,6 +217,11 @@ var game = {
 				}
 
 				armcar.deactive = function () {}
+
+				armcar.draw = function () {
+					context.fillStyle = game.get.r ('color');
+					context.fillRect (armcar.x, armcar.y, armcar.w, armcar.h);
+				}
 
 				armcar.tick = function () {
 					armcar.chat ();
