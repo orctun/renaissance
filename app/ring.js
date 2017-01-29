@@ -505,6 +505,7 @@ var game = {
 		hero: function (_) {
 			let hero = game.create.unit (_);
 				hero.action = _.action || function () {};
+				hero.death = _.death || function () {};
 				hero.meta = 'hero';
 				hero.weapon = _.weapon || 'none';
 
@@ -538,6 +539,10 @@ var game = {
 							}
 						}
 					}
+				}
+
+				hero.die = function () {
+					if (hero.hp[0] <= 0) { hero.death (); }
 				}
 
 				hero.go = function () {
@@ -575,6 +580,7 @@ var game = {
 					hero.use ();
 					hero.vector ();
 					hero.go ();
+					hero.die ();
 				}
 
 				hero.use = function () {

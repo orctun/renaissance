@@ -25,6 +25,7 @@ game.get.i ([
 	'girl',
 	'go',
 	'fly',
+	'home',
 	'intro',
 	'intro2',
 	'intro3',
@@ -53,6 +54,7 @@ game.get.i ([
 	'red',
 	'redzone',
 	'road', //33 32
+	'roadtrip',
 	'roof',
 	'start',
 	'test',

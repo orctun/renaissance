@@ -1,4 +1,4 @@
-game.scene.load = function () { game.scene.roadtrip (); }
+game.scene.load = function () { game.scene.menu (); }
 
 game.scene.begin = function () {
 	game.wipe ();
@@ -105,14 +105,16 @@ game.scene.begin1 = function () {
 	game.create.block ({ h: 391, i: game.i.pillar, w: 54, x: 928, y: 150, z: 2}).load ();
 	game.create.block ({ h: 98, i: game.i.black, w: 596, x: 340, y: 520, z: 1}).load ();
 
-	game.create.text ({ align: 'center', color: '#fff', font: 'Arial', id: 'tip_move', size: 25,  text: '[Обучение] Прежде, чем завершить обучение, вы должны научиться постоять за себя', x: 640, y: 670, z: 1 }).load ();
+	game.create.text ({ align: 'center', color: '#fff', font: 'Arial', id: 'tip_move', size: 25,  text: '[Обучение] Когда у вас появится оружие, вы сможете атаковать, используя мышь', x: 640, y: 670, z: 1 }).load ();
 
-	let hero = game.create.hero ({ h: 50, hp: [10, 10], i: game.i.men, phys: { h: 50, w: 20 }, speed: 7, w: 35, weapon: 'shoot', x: 515, y: 335, z: 1});
+	let hero = game.create.hero ({ death: function () { game.scene.begin1 (); }, h: 50, hp: [10, 10], i: game.i.men, phys: { h: 50, w: 20 }, speed: 7, w: 35, weapon: 'shoot', x: 515, y: 335, z: 1});
 		hero.load ();
 
 	game.create.fly ({ ar: 120, h: 50, hp: [10, 10], box: arena, phys: { h: 50, w: 20 }, i: game.i.fly, speed: 4, w: 35, x: 715, y: 335, z: 1}).load ();
 
 	game.create.fly ({ ar: 120, h: 50, hp: [10, 10], box: arena, i: game.i.fly, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 715, y: 200, z: 1}).load ();
+
+	game.create.fly ({ ar: 120, h: 50, hp: [10, 10], box: arena, i: game.i.fly, phys: { h: 50, w: 20 }, speed: 4, w: 35, x: 800, y: 400, z: 1}).load ();
 
 	let next = true;
 	game.create.timer ({
@@ -156,6 +158,26 @@ game.scene.begin1 = function () {
 		},
 		interval: 1000
 	}).load ();
+}
+
+game.scene.demo = function () {
+	game.wipe ();
+	window.document.body.style.background = '#000';
+	game.create.button ({ action: function () { game.play ({ name: 'click' }); game.scene.menu (); }, h: 15, i: game.i.next, w: 25, x: 950, y: 380 }).load ();
+	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'Arial', size: 25,
+		text: 'Конец демки', x: 640, y: 300 }).load ();
+	game.create.text ({ align: 'center', baseline: 'middle', color: '#888', font: 'Arial', size: 25,
+			text: 'Нажатие на продолжить вернёт в стартовое меню.', x: 640, y: 340 }).load ();
+}
+
+game.scene.home = function () {
+	game.wipe ();
+	game.create.sprite ({ h: 720, i: game.i.home, w: 1280, x: 0, y: 0}).load ();
+	game.create.button ({ action: function () { game.play ({ name: 'click' }); game.scene.demo (); }, h: 15, i: game.i.next, w: 25, x: 950, y: 380 }).load ();
+	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'Arial', size: 25,
+		text: 'Дом, милый дом. Навибо долго смотрел на горевший дом,', x: 640, y: 300 }).load ();
+	game.create.text ({ align: 'center', baseline: 'middle', color: '#fff', font: 'Arial', size: 25,
+			text: 'пока не осознал, что же на самом деле произошло.', x: 640, y: 340 }).load ();
 }
 
 game.scene.hospital = function () {
@@ -352,14 +374,26 @@ game.scene.road = function () {
 	game.create.arm ({ active: go, ar: 150, h: 50, hp: [5, 5], i: game.i.arm, speed: 4, w: 35, x: 700, y: 300, z: 1}).load ();
 
 	//exit
-	game.create.gate ({ h: 25, i: game.i.up, in: function () { game.play ({ name: 'open' }); game.scene.roadtrip (); }, w: 25, x: 900, y: 50, z: 1}).load ();
+	game.create.gate ({ h: 25, i: game.i.up, in: function () { game.play ({ name: 'open' }); game.scene.road1 (); }, w: 25, x: 900, y: 50, z: 1}).load ();
 
 	//sound
 	game.play ({ name: 'speak', ost: true, volume: 0.2 });
 }
 
+game.scene.road1 = function () {
+	game.wipe ();
+	game.create.sprite ({ h: 720, i: game.i.roadtrip, w: 1280, x: 0, y: 0}).load ();
+	game.create.button ({ action: function () { game.play ({ name: 'click' }); game.scene.roadtrip (); }, h: 15, i: game.i.next, w: 25, x: 1080, y: 420 }).load ();
+	game.create.text ({ align: 'center', baseline: 'middle', color: '#000', font: 'Arial', size: 25,
+		text: 'Навибо удалось сбежать от вооружённых людей,', x: 640, y: 340 }).load ();
+	game.create.text ({ align: 'center', baseline: 'middle', color: '#000', font: 'Arial', size: 25,
+			text: 'но не от мигреней. Чтобы доехать до дома, пришлось догнаться', x: 640, y: 380 }).load ();
+}
+
 game.scene.roadtrip = function () {
 	game.wipe ();
+
+	window.document.body.style.background = 'url(data/roadtrip.png)';
 
 	//road
 	game.create.animation ({ a: game.a.road_go, delay: 40, h: 720, i: game.i.road, repeat: true, w: 130, x: 611, y: 0 }).load ();
@@ -368,16 +402,29 @@ game.scene.roadtrip = function () {
 	game.create.block ({ h: 720, i: game.i.black, w: 10, x: 741, y: 0 }).load ();
 
 	//car
-	game.create.car ({ h: 65, i: game.i.car, speed: 3, w: 30, x: 640, y: 600 }).load ();
+	game.create.car ({ h: 65, i: game.i.car, speed: 4, w: 30, x: 640, y: 600 }).load ();
 
 	//sound
 	game.play ({ name: '60', ost: true, volume: 0.05 });
 
 	//gameplay
+	let time = window.time;
+	let timeout = 60;
+	let timer = game.create.text ({ color: game.get.r ('color'), fill: game.get.r ('color'), font: 'monospace', size: 50, text: timeout, x: 800, y: 450 }); timer.load ();
 	game.create.timer ({
 		action: function () {
-			if (!game.get.r (0, 3, true)) {
-				game.create.armcar ({ active: function () { game.scene.roadtrip (); } , h: 65, i: game.i.car1, speed: game.get.r (1, 4, true), w: 30, x: game.get.r (611, 711, true), y: 0, z: 1 }).load ();
+			if (timeout > 0) {
+				timeout--;
+				timer.color = game.get.r ('color');
+				timer.fill = game.get.r ('color');
+				timer.text = timeout;
+				game.zen (timer);
+
+				if (!game.get.r (0, 3, true)) {
+					game.create.armcar ({ active: function () { game.scene.roadtrip (); } , h: 65, i: game.i.car1, speed: game.get.r (1, 4, true), w: 30, x: game.get.r (611, 711, true), y: 0, z: 1 }).load ();
+				}
+			} else {
+				game.scene.home ();
 			}
 		},
 		interval: 1000
